@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { motion, AnimatePresence } from "framer-motion"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { AlumniCarousel } from "@/components/alumni-carousel"
 
 // Sample data
 const notices = [
@@ -614,7 +615,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Alumni Section */}
+        {/* Alumni Section with Interactive Carousel */}
         <section className="py-12 md:py-24 bg-palette-beige/30">
           <motion.div
             className="container px-4 md:px-6"
@@ -636,37 +637,10 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {alumni.map((person, index) => (
-                <motion.div
-                  key={person.id}
-                  variants={itemVariants}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                >
-                  <Card className="overflow-hidden h-full">
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={person.image || "/placeholder.svg"}
-                        alt={person.name}
-                        fill
-                        className="object-cover transition-transform duration-500 hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-palette-darkGreen/50"></div>
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="font-medium text-lg">{person.name}</h3>
-                        <p className="text-sm text-white/80">{person.role}</p>
-                      </div>
-                    </div>
-                    <div className="p-4 space-y-2 bg-white dark:bg-palette-darkGreen">
-                      <Badge variant="outline" className="mb-2 border-palette-brightGreen text-palette-brightGreen">
-                        Class of {person.year}
-                      </Badge>
-                      <p className="text-sm text-palette-darkGreen/80 dark:text-white/80 italic">"{person.quote}"</p>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+            
+            {/* Interactive Alumni Carousel */}
+            <AlumniCarousel alumni={alumni} />
+            
             <div className="mt-10 text-center">
               <Button
                 variant="outline"
