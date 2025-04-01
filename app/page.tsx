@@ -41,7 +41,7 @@ const services = [
     icon: "🔧",
     url: "/tech-repair",
     color: "bg-palette-brightGreen",
-    image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=300&text=Tech+Repair",
   },
   {
     id: 2,
@@ -50,7 +50,7 @@ const services = [
     icon: "🎬",
     url: "/anime-hub",
     color: "bg-palette-lightYellow",
-    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=300&text=Anime+Hub",
   },
   {
     id: 3,
@@ -59,7 +59,7 @@ const services = [
     icon: "📚",
     url: "/study",
     color: "bg-palette-beige",
-    image: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=300&text=Study+Resources",
   },
   {
     id: 4,
@@ -68,7 +68,7 @@ const services = [
     icon: "🎉",
     url: "/events",
     color: "bg-palette-darkGreen text-white",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=300&text=Campus+Events",
   },
 ]
 
@@ -77,7 +77,7 @@ const alumni = [
     id: 1,
     name: "Alex Johnson",
     role: "Software Engineer at Google",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=200&text=AJ",
     year: "2023",
     quote: "The tech repair service helped me learn practical skills that impressed my interviewers.",
   },
@@ -85,7 +85,7 @@ const alumni = [
     id: 2,
     name: "Samantha Lee",
     role: "UX Designer at Apple",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=200&text=SL",
     year: "2022",
     quote: "I found my passion for design through campus events and creative workshops.",
   },
@@ -93,7 +93,7 @@ const alumni = [
     id: 3,
     name: "Marcus Chen",
     role: "Data Scientist at Netflix",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=200&text=MC",
     year: "2021",
     quote: "The study resources and group sessions were crucial for my academic success.",
   },
@@ -101,17 +101,17 @@ const alumni = [
     id: 4,
     name: "Priya Patel",
     role: "Product Manager at Microsoft",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80",
+    image: "/placeholder.svg?height=200&width=200&text=PP",
     year: "2020",
     quote: "CollegeHub connected me with like-minded students who became lifelong friends and colleagues.",
   },
 ]
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80", // Campus Life
-  "https://images.unsplash.com/photo-1529148482759-b35b25c5f217?auto=format&fit=crop&q=80", // Study Groups
-  "https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&q=80", // Tech Workshops
-  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80", // Social Events
+  "/placeholder.svg?height=600&width=800&text=Campus+Life",
+  "/placeholder.svg?height=600&width=800&text=Study+Groups",
+  "/placeholder.svg?height=600&width=800&text=Tech+Workshops",
+  "/placeholder.svg?height=600&width=800&text=Social+Events",
 ]
 
 export default function Home() {
@@ -646,8 +646,6 @@ export default function Home() {
             </div>
           </motion.div>
         </section>
-
-               
       </main>
 
       {/* Footer */}
