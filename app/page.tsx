@@ -42,7 +42,8 @@ const services = [
     icon: "🔧",
     url: "/tech-repair",
     color: "bg-palette-brightGreen",
-    image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?q=80&w=870&auto=format&fit=crop",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2U1MzgycDRleDF0aXhrOHAwdmhidTluajFhenF3dnM1MnRrc3BkMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JIX9t2j0ZTN9S/giphy.gif",
   },
   {
     id: 2,
@@ -51,7 +52,8 @@ const services = [
     icon: "🎬",
     url: "/anime-hub",
     color: "bg-palette-lightYellow",
-    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=774&auto=format&fit=crop",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHlyemhhdGozc2xoZnV2djhiaDRrbDduYTJqcmhucmF1ZzR2NW5wYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13xxoHYKjVkqCQ/giphy.gif",
   },
   {
     id: 3,
@@ -60,7 +62,8 @@ const services = [
     icon: "📚",
     url: "/study",
     color: "bg-palette-beige",
-    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=873&auto=format&fit=crop",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmt1a2tmYnN5aWxna2ZtNXlxbzdjeXhidTFzamZlZTBpb2U0OXNrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPEqDGUULpEU0aQ/giphy.gif",
   },
   {
     id: 4,
@@ -69,7 +72,8 @@ const services = [
     icon: "🎉",
     url: "/events",
     color: "bg-palette-darkGreen text-white",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=870&auto=format&fit=crop",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGVsdXliamRha3g1YjZhczcxZHNlYXk1dDF5eXhkcGJrd2IwOTJneSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JhL0Gpfbvs4Y07K/giphy.gif",
   },
 ]
 
@@ -553,12 +557,22 @@ export default function Home() {
                     <Card className="overflow-hidden h-full transition-all duration-200 hover:shadow-lg border-2 hover:border-palette-brightGreen border-transparent">
                       {/* Full-height preview container */}
                       <div className="relative aspect-video w-full overflow-hidden">
-                        <Image
-                          src={service.image || "/placeholder.svg"}
-                          alt={service.title}
-                          fill
-                          className="object-cover transition-transform duration-700 hover:scale-110"
-                        />
+                        {service.mediaType === "gif" ? (
+                          // Use standard img tag for GIFs to ensure animation works
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          // Use Next.js Image component for static images
+                          <Image
+                            src={service.image || "/placeholder.svg"}
+                            alt={service.title}
+                            fill
+                            className="object-cover transition-transform duration-700 hover:scale-110"
+                          />
+                        )}
                         
                         {/* Animated overlay that reveals on hover */}
                         <div className="absolute inset-0 bg-gradient-to-t from-palette-darkGreen/80 to-transparent opacity-100">
