@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 30% 98%;
+    --foreground: 96 26% 24%;
+    --card: 0 0% 100%;
+    --card-foreground: 96 26% 24%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 96 26% 24%;
+    --primary: 84 54% 53%;
+    --primary-foreground: 96 26% 24%;
+    --secondary: 60 62% 66%;
+    --secondary-foreground: 96 26% 24%;
+    --muted: 39 42% 87%;
+    --muted-foreground: 96 26% 40%;
+    --accent: 39 42% 75%;
+    --accent-foreground: 96 26% 24%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 39 42% 87%;
+    --input: 39 42% 87%;
+    --ring: 84 54% 53%;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 96 26% 24%;
+    --foreground: 39 42% 87%;
+    --card: 96 26% 24%;
+    --card-foreground: 39 42% 87%;
+    --popover: 96 26% 24%;
+    --popover-foreground: 39 42% 87%;
+    --primary: 84 54% 53%;
+    --primary-foreground: 96 26% 24%;
+    --secondary: 60 62% 66%;
+    --secondary-foreground: 96 26% 24%;
+    --muted: 96 26% 30%;
+    --muted-foreground: 39 42% 75%;
+    --accent: 39 42% 75%;
+    --accent-foreground: 96 26% 24%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 39 42% 87%;
+    --border: 96 26% 30%;
+    --input: 96 26% 30%;
+    --ring: 84 54% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Replace gradient background with solid color background */
+    background-color: hsl(var(--background));
+  }
+}
+
