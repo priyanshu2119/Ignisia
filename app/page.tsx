@@ -105,7 +105,7 @@ const alumni = [
     role: "Product Manager at Microsoft",
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=774&auto=format&fit=crop",
     year: "2020",
-    quote: "CollegeHub connected me with like-minded students who became lifelong friends and colleagues.",
+    quote: "Ignisia connected me with like-minded students who became lifelong friends and colleagues.",
   },
 ]
 
@@ -194,7 +194,7 @@ export default function Home() {
                     <path d="M2 12l10 5 10-5" />
                   </svg>
                 </div>
-                <span className="text-xl font-bold text-palette-darkGreen">CollegeHub</span>
+                <span className="text-xl font-bold text-palette-darkGreen">Ignisia</span>
               </Link>
             </motion.div>
           </div>
@@ -688,7 +688,7 @@ export default function Home() {
                     <path d="M2 12l10 5 10-5" />
                   </svg>
                 </div>
-                <span className="font-bold text-palette-darkGreen">CollegeHub</span>
+                <span className="font-bold text-palette-darkGreen">Ignisia</span>
               </Link>
               <p className="text-sm text-palette-darkGreen/80">
                 Your one-stop platform for all college services and resources.
@@ -850,7 +850,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t py-6 text-center text-sm text-palette-darkGreen/70">
-            &copy; {new Date().getFullYear()} CollegeHub. All rights reserved.
+            &copy; {new Date().getFullYear()} Ignisia. All rights reserved.
           </div>
         </div>
       </footer>

@@ -184,7 +184,7 @@ export default function TechRepairPage() {
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
           <Link href="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4 text-palette-darkGreen" />
-            <span className="text-palette-darkGreen">Back to CollegeHub</span>
+            <span className="text-palette-darkGreen">Back to Ignisia</span>
           </Link>
           <ThemeToggle />
         </div>
@@ -467,10 +467,10 @@ export default function TechRepairPage() {
         <div className="container px-4 py-6 md:px-6 md:py-8">
           <div className="flex flex-col gap-2 sm:flex-row justify-between items-center">
             <p className="text-sm text-palette-darkGreen/80">
-              &copy; {new Date().getFullYear()} CollegeHub Tech Repair. All rights reserved.
+              &copy; {new Date().getFullYear()} Ignisia Tech Repair. All rights reserved.
             </p>
             <Link href="/" className="text-sm text-palette-brightGreen hover:underline">
-              Back to CollegeHub
+              Back to Ignisia
             </Link>
           </div>
         </div>
