@@ -391,9 +391,8 @@ export default function Home() {
                   </Button>
                   <Button
                     variant="outline"
-                    size="lg"
                     asChild
-                    className="border-palette-darkGreen text-palette-darkGreen hover:bg-palette-darkGreen/10"
+                    className="border-palette-darkGreen text-palette-darkGreen hover:bg-palette-darkGreen/10 dark:border-palette-brightGreen dark:text-palette-brightGreen dark:hover:bg-palette-brightGreen/10"
                   >
                     <Link href="/services" className="flex items-center gap-1">
                       Explore Services <ChevronRight className="h-4 w-4" />
@@ -531,10 +530,10 @@ export default function Home() {
                 <Badge variant="outline" className="border-palette-brightGreen text-palette-brightGreen">
                   Services
                 </Badge>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-palette-darkGreen">
+                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-palette-darkGreen dark:text-white">
                   Everything You Need
                 </h2>
-                <p className="mx-auto max-w-[700px] text-palette-darkGreen/80 md:text-lg">
+                <p className="mx-auto max-w-[700px] text-palette-darkGreen/80 dark:text-white/80 md:text-lg">
                   Connect to all these amazing services with just one click. We've got you covered.
                 </p>
               </div>
@@ -566,7 +565,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="p-6 space-y-2">
-                        <p className="text-sm text-palette-darkGreen/80">{service.description}</p>
+                        <p className="text-sm text-palette-darkGreen/80 dark:text-white/80">{service.description}</p>
                         <div className="pt-2 flex items-center text-sm text-palette-brightGreen">
                           <span>Visit</span>
                           <ExternalLink
@@ -596,10 +595,10 @@ export default function Home() {
                 <Badge variant="outline" className="border-palette-brightGreen text-palette-brightGreen">
                   Alumni
                 </Badge>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-palette-darkGreen">
+                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-palette-darkGreen dark:text-white">
                   Success Stories
                 </h2>
-                <p className="mx-auto max-w-[700px] text-palette-darkGreen/80 md:text-lg">
+                <p className="mx-auto max-w-[700px] text-palette-darkGreen/80 dark:text-white/80 md:text-lg">
                   See where our graduates are now and get inspired by their journeys.
                 </p>
               </div>
@@ -625,11 +624,11 @@ export default function Home() {
                         <p className="text-sm text-white/80">{person.role}</p>
                       </div>
                     </div>
-                    <div className="p-4 space-y-2 bg-white">
+                    <div className="p-4 space-y-2 bg-white dark:bg-palette-darkGreen">
                       <Badge variant="outline" className="mb-2 border-palette-brightGreen text-palette-brightGreen">
                         Class of {person.year}
                       </Badge>
-                      <p className="text-sm text-palette-darkGreen/80 italic">"{person.quote}"</p>
+                      <p className="text-sm text-palette-darkGreen/80 dark:text-white/80 italic">"{person.quote}"</p>
                     </div>
                   </Card>
                 </motion.div>
@@ -639,7 +638,7 @@ export default function Home() {
               <Button
                 variant="outline"
                 asChild
-                className="border-palette-darkGreen text-palette-darkGreen hover:bg-palette-darkGreen/10"
+                className="border-palette-darkGreen text-palette-darkGreen hover:bg-palette-darkGreen/10 dark:border-palette-brightGreen dark:text-palette-brightGreen dark:hover:bg-palette-brightGreen/10"
               >
                 <Link href="/alumni">View All Alumni</Link>
               </Button>
