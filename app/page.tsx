@@ -41,7 +41,7 @@ const services = [
     title: "Tech Repair",
     description: "Get your gadgets fixed by fellow tech-savvy students at affordable rates.",
     icon: "🔧",
-    url: "/tech-repair",
+    url: "https://jugadu-tech-repairs.vercel.app",
     color: "bg-palette-brightGreen",
     mediaType: "gif",
     image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2U1MzgycDRleDF0aXhrOHAwdmhidTluajFhenF3dnM1MnRrc3BkMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JIX9t2j0ZTN9S/giphy.gif",
