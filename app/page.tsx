@@ -76,17 +76,7 @@ const services = [
     mediaType: "gif",
     image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGVsdXliamRha3g1YjZhczcxZHNlYXk1dDF5eXhkcGJrd2IwOTJneSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JhL0Gpfbvs4Y07K/giphy.gif",
   },
-  {
-    id: 5,
-    title: "Study Resources",
-    description: "Access notes, past papers, and study groups for all your courses.",
-    icon: "📚",
-    url: "/study",
-    color: "bg-palette-beige",
-    mediaType: "gif",
-    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmt1a2tmYnN5aWxna2ZtNXlxbzdjeXhidTFzamZlZTBpb2U0OXNrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPEqDGUULpEU0aQ/giphy.gif",
-  },
-]
+  ]
 
 
 const alumni = [
@@ -121,6 +111,14 @@ const alumni = [
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=774&auto=format&fit=crop",
     year: "2020",
     quote: "Ignisia connected me with like-minded students who became lifelong friends and colleagues.",
+  },
+  {
+    id: 5,
+    name: "Marcus Chen",
+    role: "Data Scientist at Netflix",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=774&auto=format&fit=crop",
+    year: "2021",
+    quote: "The study resources and group sessions were crucial for my academic success.",
   },
 ]
 
