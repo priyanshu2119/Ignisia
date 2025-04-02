@@ -76,6 +76,16 @@ const services = [
     mediaType: "gif",
     image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGVsdXliamRha3g1YjZhczcxZHNlYXk1dDF5eXhkcGJrd2IwOTJneSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JhL0Gpfbvs4Y07K/giphy.gif",
   },
+  {
+    id: 5,
+    title: "Study Resources",
+    description: "Access notes, past papers, and study groups for all your courses.",
+    icon: "📚",
+    url: "/study",
+    color: "bg-palette-beige",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmt1a2tmYnN5aWxna2ZtNXlxbzdjeXhidTFzamZlZTBpb2U0OXNrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPEqDGUULpEU0aQ/giphy.gif",
+  },
 ]
 
 
