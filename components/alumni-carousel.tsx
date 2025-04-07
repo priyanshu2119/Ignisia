@@ -1,9 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
+import { X } from "lucide-react"
 
 interface Alumni {
   id: number
@@ -18,184 +19,251 @@ interface AlumniCarouselProps {
   alumni: Alumni[]
 }
 
+// Constants for 3D orbit
+const ORBIT_RADIUS = 250; // Distance from center for orbiting
+const ORBIT_DEPTH = 150;  // Z-axis variation for 3D effect
+const BOX_DEPTH_OFFSET = 100; // Position of the invisible focal point behind the box
+
 export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [selectedCard, setSelectedCard] = useState<number | null>(null)
+  const [autoRotate, setAutoRotate] = useState(true)
+  const [orbitProgress, setOrbitProgress] = useState(0) // 0-360 degrees of orbit rotation
+  const containerRef = useRef<HTMLDivElement>(null)
   
-  // Auto-rotate every 5 seconds if no interaction
+  // Number of alumni cards
+  const numCards = alumni.length
+  
+  // Stop auto-rotation when a card is selected
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (hoveredIndex === null) { // Only auto-rotate if not being hovered
-        setActiveIndex(prev => (prev + 1) % alumni.length)
-      }
-    }, 5000)
+    if (selectedCard !== null) {
+      setAutoRotate(false)
+    } else {
+      setAutoRotate(true)
+    }
+  }, [selectedCard])
+
+  // Auto rotation effect
+  useEffect(() => {
+    if (!autoRotate || !isHovered) return;
     
-    return () => clearInterval(interval)
-  }, [alumni.length, hoveredIndex])
+    const interval = setInterval(() => {
+      setOrbitProgress(prev => (prev + 0.5) % 360);
+    }, 50);
+    
+    return () => clearInterval(interval);
+  }, [autoRotate, isHovered]);
 
   return (
-    <div className="relative h-[500px] mx-auto max-w-5xl">
-      {/* Decorative circles */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <motion.div 
-          className="absolute w-[400px] h-[400px] rounded-full border-2 border-palette-brightGreen/30 dark:border-palette-brightGreen/20"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+    <div className="relative py-16 mx-auto max-w-5xl perspective">
+      {/* Central box that contains the cards */}
+      <div 
+        ref={containerRef}
+        className="relative mx-auto w-64 h-64 bg-palette-beige rounded-xl border-4 border-palette-darkGreen/30 flex items-center justify-center shadow-lg z-10"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => {
+          if (selectedCard === null) {
+            setIsHovered(false)
+          }
+        }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-palette-brightGreen/10 rounded-lg"
+          animate={{ 
+            scale: isHovered ? [1, 1.05, 1] : 1,
+          }}
+          transition={{ 
+            duration: 2, 
+            repeat: isHovered ? Infinity : 0,
+            repeatType: "reverse" 
+          }}
         />
+        
+        {/* Box content */}
+        <div className="text-center p-4">
+          <motion.div
+            animate={{ 
+              opacity: selectedCard !== null ? 0 : 1,
+              scale: selectedCard !== null ? 0.8 : 1
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="text-2xl font-bold text-palette-darkGreen mb-2">Alumni</h3>
+            <p className="text-palette-darkGreen/70 text-sm">
+              {isHovered ? "Click a card to learn more" : "Hover to explore alumni stories"}
+            </p>
+          </motion.div>
+        </div>
+        
+        {/* Decorative elements */}
         <motion.div 
-          className="absolute w-[300px] h-[300px] rounded-full border-2 border-palette-darkGreen/20 dark:border-palette-darkGreen/10"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute w-full h-full rounded-xl border-2 border-palette-brightGreen/20"
+          animate={{ 
+            rotate: 360,
+            scale: isHovered ? 1.1 : 1
+          }}
+          transition={{ 
+            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+            scale: { duration: 0.5 }
+          }}
         />
       </div>
       
-      {/* Alumni cards container */}
-      <div className="relative w-full h-full flex items-center justify-center">
+      {/* Invisible focal point for 3D orbit (positioned behind the box) */}
+      <div className="absolute inset-0 flex items-center justify-center" style={{ transform: `translateZ(-${BOX_DEPTH_OFFSET}px)` }}>
+        {/* This div serves as the invisible focal point for the orbit */}
+      </div>
+      
+      {/* Orbiting alumni cards */}
+      <div className="absolute inset-0 flex items-center justify-center preserve-3d">
         {alumni.map((person, index) => {
-          // Calculate position based on active index
-          const position = (index - activeIndex + alumni.length) % alumni.length
+          // Calculate the base angle for card positioning with offset for each card
+          const baseAngle = (index * (360 / numCards)) % 360;
           
-          // Visual properties based on position
-          let translateX = 0
-          let opacity = 0
-          let scale = 0.7
-          let zIndex = 0
+          // Add orbit progress to create rotation effect
+          const angle = (baseAngle + orbitProgress) % 360;
           
-          if (position === 0) {
-            // Center (active) card
-            translateX = 0
-            opacity = 1
-            scale = 1
-            zIndex = 30
-          } else if (position === 1 || position === alumni.length - 1) {
-            // Cards to the sides
-            translateX = position === 1 ? 280 : -280
-            opacity = 0.7
-            scale = 0.85
-            zIndex = 20
-          } else if (position === 2 || position === alumni.length - 2) {
-            // Cards further to the sides
-            translateX = position === 2 ? 480 : -480
-            opacity = 0.4
-            scale = 0.7
-            zIndex = 10
-          } else {
-            // Hidden cards
-            translateX = position < alumni.length / 2 ? 600 : -600
-            opacity = 0
-            scale = 0.5
-            zIndex = 0
-          }
+          // Calculate 3D position using sin/cos
+          const radians = (angle * Math.PI) / 180;
+          
+          // Calculate whether this card should be popped out
+          const isSelected = selectedCard === index;
+          
+          // Calculate z-index based on position in orbit
+          // Cards in front (angles near 0 or 360) should have higher z-index
+          const zIndex = Math.round(Math.cos(radians) * 10) + 20;
+          
+          // Calculate opacity based on position (more visible in front)
+          const cardOpacity = isHovered ? 0.4 + (Math.cos(radians) + 1) / 4 : 0;
+          
+          // Calculate scale based on position (larger in front, smaller in back)
+          const cardScale = isHovered ? 0.7 + (Math.cos(radians) + 1) / 5 : 0.7;
           
           return (
-            <motion.div
-              key={person.id}
-              className="absolute w-[280px] cursor-pointer"
-              style={{ zIndex }}
-              animate={{ 
-                x: translateX,
-                opacity,
-                scale,
-              }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30,
-                mass: 0.8
-              }}
-              whileHover={{ 
-                scale: scale * 1.05,
-                transition: { duration: 0.2 }
-              }}
-              onClick={() => setActiveIndex(index)}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-            >
-              <motion.div 
-                className="bg-white dark:bg-palette-darkGreen rounded-xl overflow-hidden shadow-lg"
-                animate={{
-                  rotateY: hoveredIndex === index ? 0 : 5,
-                  y: hoveredIndex === index ? -10 : 0
-                }}
-              >
-                {/* Alumni image */}
-                <div className="relative h-[180px] overflow-hidden">
-                  <Image
-                    src={person.image}
-                    alt={person.name}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-palette-darkGreen/50"></div>
-                  
-                  {/* Floating elements that animate for active card */}
-                  {activeIndex === index && (
-                    <>
-                      <motion.div 
-                        className="absolute -top-8 -right-8 w-20 h-20 rounded-full bg-palette-brightGreen/20"
-                        animate={{ y: [0, -10, 0], rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            <AnimatePresence key={person.id} mode="wait">
+              {/* Orbiting card */}
+              {!isSelected && (
+                <motion.div
+                  className="absolute preserve-3d"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    // 3D positioning for orbit
+                    x: isHovered ? `${Math.sin(radians) * ORBIT_RADIUS}px` : 0,
+                    y: isHovered ? `${Math.sin(radians) * 40}px` : 0, // Small vertical oscillation
+                    z: isHovered ? `${Math.cos(radians) * ORBIT_DEPTH}px` : 0,
+                    rotateY: isHovered ? -angle : 0, // Rotate cards to face the viewer
+                    scale: cardScale,
+                    opacity: cardOpacity,
+                    zIndex: zIndex,
+                  }}
+                  transition={{ 
+                    type: "spring",
+                    damping: 15,
+                    stiffness: 200,
+                    // Different durations for coming out of box vs orbiting
+                    default: { 
+                      duration: autoRotate ? 0.8 : 0.5,
+                    }
+                  }}
+                  exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.3 } }}
+                  onClick={() => setSelectedCard(index)}
+                  whileHover={{ scale: cardScale * 1.2, zIndex: 30 }}
+                >
+                  <div className="w-40 h-40 rounded-lg shadow-md overflow-hidden cursor-pointer transform preserve-3d">
+                    {/* Alumni image */}
+                    <div className="relative h-40 w-40">
+                      <Image
+                        src={person.image}
+                        alt={person.name}
+                        fill
+                        className="object-cover"
                       />
-                      <motion.div 
-                        className="absolute -bottom-4 -left-4 w-12 h-12 rounded-full bg-palette-lightYellow/30"
-                        animate={{ x: [0, 10, 0], rotate: -360 }}
-                        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                      />
-                    </>
-                  )}
-                  
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="font-medium text-lg">{person.name}</h3>
-                    <p className="text-sm text-white/80">{person.role}</p>
+                      {/* Only show name on hover and when close to front */}
+                      {Math.cos(radians) > 0.3 && (
+                        <div className="absolute inset-0 bg-palette-darkGreen/50 flex items-end">
+                          <div className="p-2 text-white w-full">
+                            <p className="font-medium text-sm truncate">{person.name}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-                
-                <div className="p-4 space-y-2">
-                  <Badge variant="outline" className="mb-2 border-palette-brightGreen text-palette-brightGreen">
-                    Class of {person.year}
-                  </Badge>
-                  
-                  <AnimatePresence>
-                    {(activeIndex === index || hoveredIndex === index) && (
-                      <motion.p 
-                        className="text-sm text-palette-darkGreen/80 dark:text-white/80 italic"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        "{person.quote}"
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-                
-                {/* Indicator for active alumni */}
-                {activeIndex === index && (
-                  <motion.div 
-                    className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-palette-brightGreen rounded-full"
-                    animate={{ opacity: [0.5, 1, 0.5], width: ['60%', '80%', '60%'] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                )}
-              </motion.div>
-            </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           )
         })}
       </div>
       
-      {/* Navigation dots */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {alumni.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === activeIndex ? "w-8 bg-palette-brightGreen" : "bg-palette-darkGreen/30 hover:bg-palette-darkGreen/50"
-            }`}
-            onClick={() => setActiveIndex(index)}
-          />
-        ))}
-      </div>
+      {/* Selected card details (popped out) */}
+      <AnimatePresence>
+        {selectedCard !== null && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center z-50 bg-black/50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCard(null)}
+          >
+            <motion.div
+              className="relative bg-white rounded-xl overflow-hidden max-w-md w-full mx-4 shadow-2xl"
+              initial={{ scale: 0.8, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.8, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button 
+                onClick={() => setSelectedCard(null)}
+                className="absolute top-4 right-4 z-20 bg-white/80 p-1 rounded-full text-palette-darkGreen hover:bg-white"
+              >
+                <X size={20} />
+              </button>
+              
+              {/* Alumni hero section */}
+              <div className="relative h-48">
+                <Image
+                  src={alumni[selectedCard].image}
+                  alt={alumni[selectedCard].name}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-palette-darkGreen/90 to-transparent"></div>
+                
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-xl font-bold">{alumni[selectedCard].name}</h3>
+                  <p className="text-white/90">{alumni[selectedCard].role}</p>
+                </div>
+              </div>
+              
+              <div className="p-6 space-y-4">
+                <Badge className="bg-palette-brightGreen text-palette-darkGreen">
+                  Class of {alumni[selectedCard].year}
+                </Badge>
+                
+                <div className="space-y-2">
+                  <h4 className="font-medium text-palette-darkGreen">Alumni Story</h4>
+                  <motion.p 
+                    className="text-palette-darkGreen/80 italic"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    "{alumni[selectedCard].quote}"
+                  </motion.p>
+                </div>
+                
+                <div className="pt-4 border-t border-palette-beige/50">
+                  <p className="text-sm text-palette-darkGreen/70">
+                    Click outside this card to return to the alumni showcase
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
