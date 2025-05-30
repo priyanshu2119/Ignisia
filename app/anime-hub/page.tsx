@@ -541,7 +541,7 @@ export default function AnimeHubPage() {
                 Want to suggest an anime for our next watch party?
               </h2>
               <p className="text-palette-darkGreen/80 md:text-lg">
-                Submit your suggestions and vote on what we'll watch next at our weekly anime screenings.
+                Submit your suggestions and vote on what we&apos;ll watch next at our weekly anime screenings.
               </p>
             </div>
             <div className="flex flex-col gap-3 min-[400px]:flex-row md:justify-end md:items-center">

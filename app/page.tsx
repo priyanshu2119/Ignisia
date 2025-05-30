@@ -86,7 +86,9 @@ const alumni = [
     role: "Software Engineer at Google",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=774&auto=format&fit=crop",
     year: "2023",
-    quote: "The tech repair service helped me learn practical skills that impressed my interviewers.",
+    quote: "The tech repair service helped me learn practical skills that impressed my interviewers. Working on real devices taught me problem-solving approaches that I use daily in my role at Google.",
+    achievement: "Led development of Google's new mobile feature",
+    skills: ["React", "Node.js", "System Design"],
   },
   {
     id: 2,
@@ -94,7 +96,9 @@ const alumni = [
     role: "UX Designer at Apple",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=774&auto=format&fit=crop",
     year: "2022",
-    quote: "I found my passion for design through campus events and creative workshops.",
+    quote: "I found my passion for design through campus events and creative workshops. The anime community taught me about visual storytelling, which became central to my design philosophy.",
+    achievement: "Designed award-winning iOS accessibility features",
+    skills: ["Figma", "User Research", "Accessibility Design"],
   },
   {
     id: 3,
@@ -102,7 +106,9 @@ const alumni = [
     role: "Data Scientist at Netflix",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=774&auto=format&fit=crop",
     year: "2021",
-    quote: "The study resources and group sessions were crucial for my academic success.",
+    quote: "The study resources and group sessions were crucial for my academic success. Collaborating on data projects through Ignisia prepared me for Netflix's data-driven culture.",
+    achievement: "Built recommendation algorithms serving 200M+ users",
+    skills: ["Python", "Machine Learning", "Data Visualization"],
   },
   {
     id: 4,
@@ -110,15 +116,49 @@ const alumni = [
     role: "Product Manager at Microsoft",
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=774&auto=format&fit=crop",
     year: "2020",
-    quote: "Ignisia connected me with like-minded students who became lifelong friends and colleagues.",
+    quote: "Ignisia connected me with like-minded students who became lifelong friends and colleagues. Managing campus events taught me project management skills I use every day.",
+    achievement: "Launched Microsoft Teams features used by 300M+ users",
+    skills: ["Product Strategy", "Agile", "Cross-functional Leadership"],
   },
   {
     id: 5,
-    name: "Marcus Chen",
-    role: "Data Scientist at Netflix",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=774&auto=format&fit=crop",
+    name: "David Rodriguez",
+    role: "Software Architect at Amazon",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=774&auto=format&fit=crop",
+    year: "2019",
+    quote: "The collaborative environment at Ignisia taught me the importance of teamwork in tech. Building solutions for fellow students showed me how technology can create real impact.",
+    achievement: "Architected AWS services handling billions of requests",
+    skills: ["Cloud Architecture", "Microservices", "DevOps"],
+  },
+  {
+    id: 6,
+    name: "Maya Singh",
+    role: "AI Research Scientist at OpenAI",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=774&auto=format&fit=crop",
     year: "2021",
-    quote: "The study resources and group sessions were crucial for my academic success.",
+    quote: "The diverse community at Ignisia exposed me to different perspectives that shaped my approach to AI ethics. Our study groups tackled complex problems that prepared me for cutting-edge research.",
+    achievement: "Published breakthrough research in natural language processing",
+    skills: ["Deep Learning", "NLP", "Research Methodology"],
+  },
+  {
+    id: 7,
+    name: "James Kim",
+    role: "Cybersecurity Lead at Tesla",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=774&auto=format&fit=crop",
+    year: "2020",
+    quote: "Fixing devices through the tech repair service taught me to think like an attacker and defender. This hands-on experience was invaluable for understanding security vulnerabilities.",
+    achievement: "Secured Tesla's autonomous vehicle systems",
+    skills: ["Penetration Testing", "Network Security", "Incident Response"],
+  },
+  {
+    id: 8,
+    name: "Elena Vasquez",
+    role: "Startup Founder & CEO",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=774&auto=format&fit=crop",
+    year: "2018",
+    quote: "Organizing campus events through Ignisia taught me leadership and community building. These skills were essential when I started my own company focused on educational technology.",
+    achievement: "Raised $10M Series A for EdTech startup",
+    skills: ["Entrepreneurship", "Team Building", "Strategic Planning"],
   },
 ]
 
@@ -384,7 +424,7 @@ export default function Home() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.5 }}
                   >
-                    From tech repairs to anime discussions, study resources to campus events - we've got everything you
+                    From tech repairs to anime discussions, study resources to campus events - we&apos;ve got everything you
                     need in one place.
                   </motion.p>
                 </div>
@@ -549,7 +589,7 @@ export default function Home() {
                   Everything You Need
                 </h2>
                 <p className="mx-auto max-w-[700px] text-palette-darkGreen/80 dark:text-white/80 md:text-lg">
-                  Connect to all these amazing services with just one click. We've got you covered.
+                  Connect to all these amazing services with just one click. We&apos;ve got you covered.
                 </p>
               </div>
             </div>
@@ -567,11 +607,14 @@ export default function Home() {
                       {/* Full-height preview container */}
                       <div className="relative aspect-video w-full overflow-hidden">
                         {service.mediaType === "gif" ? (
-                          // Use standard img tag for GIFs to ensure animation works
-                          <img
+                          // Use Next.js Image component for GIFs with unoptimized prop
+                          <Image
                             src={service.image}
                             alt={service.title}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            unoptimized
+                            priority={index < 2}
                           />
                         ) : (
                           // Use Next.js Image component for static images
@@ -580,9 +623,10 @@ export default function Home() {
                             alt={service.title}
                             fill
                             className="object-cover transition-transform duration-700 hover:scale-110"
+                            priority={index < 2}
                           />
                         )}
-                        
+
                         {/* Animated overlay that reveals on hover */}
                         <div className="absolute inset-0 bg-gradient-to-t from-palette-darkGreen/80 to-transparent opacity-100">
                           <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
@@ -593,11 +637,11 @@ export default function Home() {
                             <p className="text-sm text-white/80 mt-1 line-clamp-2">{service.description}</p>
                           </div>
                         </div>
-                        
+
                         {/* Preview animation indicator */}
-                        <motion.div 
+                        <motion.div
                           className="absolute top-4 right-4 bg-palette-brightGreen text-palette-darkGreen text-xs font-medium px-2 py-1 rounded-full"
-                          animate={{ 
+                          animate={{
                             opacity: isHovered === index ? 1 : 0,
                             y: isHovered === index ? 0 : 10
                           }}
@@ -605,7 +649,7 @@ export default function Home() {
                         >
                           Preview Site
                         </motion.div>
-                        
+
                         {/* Browser-like top bar for realism */}
                         <div className="absolute top-0 left-0 right-0 h-6 bg-palette-darkGreen/70 flex items-center px-2">
                           <div className="flex space-x-1">
@@ -645,10 +689,10 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            
+
             {/* Interactive Alumni Carousel */}
             <AlumniCarousel alumni={alumni} />
-            
+
             <div className="mt-10 text-center">
               <Button
                 variant="outline"

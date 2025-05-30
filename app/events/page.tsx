@@ -138,7 +138,7 @@ export default function EventsPage() {
     return activeCategory === "All"
       ? upcomingEvents
       : upcomingEvents.filter((event) => event.category === activeCategory)
-  }, [activeCategory, upcomingEvents])
+  }, [activeCategory])
 
   return (
     <div className="min-h-screen bg-background">
@@ -208,7 +208,7 @@ export default function EventsPage() {
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold text-palette-darkGreen">Featured Events</h2>
             <p className="text-palette-darkGreen/80 max-w-[700px] mx-auto">
-              Don't miss these popular events happening on campus
+              Don&apos;t miss these popular events happening on campus
             </p>
           </div>
 
