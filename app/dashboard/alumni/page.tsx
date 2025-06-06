@@ -30,7 +30,15 @@ import {
   Building,
   Share2,
   Award,
-  Handshake
+  Handshake,
+  Trophy,
+  Target,
+  Lightbulb,
+  Coffee,
+  Rocket,
+  Sparkles,
+  PartyPopper,
+  Gift
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState } from "react"
@@ -320,12 +328,19 @@ export default function AlumniDashboard() {
                 <Briefcase className="h-5 w-5" />
                 <span>Job Board</span>
               </button>
-              <button 
+              <button
                 onClick={() => setActiveTab("mentorship")}
                 className={`flex items-center gap-2 w-full p-2 rounded-lg ${activeTab === "mentorship" ? "bg-palette-brightGreen/10 text-palette-brightGreen" : "text-palette-darkGreen hover:bg-gray-100 dark:hover:bg-gray-800"}`}
               >
                 <GraduationCap className="h-5 w-5" />
                 <span>Mentorship</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("giveback")}
+                className={`flex items-center gap-2 w-full p-2 rounded-lg ${activeTab === "giveback" ? "bg-palette-brightGreen/10 text-palette-brightGreen" : "text-palette-darkGreen hover:bg-gray-100 dark:hover:bg-gray-800"}`}
+              >
+                <Gift className="h-5 w-5" />
+                <span>Give Back</span>
               </button>
               <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-800">
                 <h3 className="px-2 text-xs font-semibold text-palette-darkGreen/70 uppercase tracking-wider">
@@ -380,9 +395,10 @@ export default function AlumniDashboard() {
             </button>
             <div className="ml-4 lg:ml-0 flex-1">
               <h1 className="text-lg font-semibold text-palette-darkGreen">
-                {activeTab === "overview" ? "Alumni Dashboard" : 
-                 activeTab === "jobs" ? "Alumni Job Board" : 
-                 "Mentorship Programs"}
+                {activeTab === "overview" ? "Alumni Dashboard" :
+                 activeTab === "jobs" ? "Alumni Job Board" :
+                 activeTab === "mentorship" ? "Mentorship Programs" :
+                 "Give Back & Support"}
               </h1>
             </div>
             <div className="flex items-center gap-4">
@@ -410,43 +426,132 @@ export default function AlumniDashboard() {
                 animate="visible"
                 className="space-y-8"
               >
-                {/* Welcome Card */}
+                {/* Welcome Card with Professional Playfulness */}
                 <motion.div variants={itemVariants}>
-                  <Card className="border-palette-darkGreen/20">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-palette-darkGreen">Welcome back, Ananya!</CardTitle>
-                      <CardDescription>Stay connected with your alma mater and fellow alumni</CardDescription>
+                  <Card className="border-palette-darkGreen/20 bg-gradient-to-r from-palette-beige/10 to-palette-brightGreen/5 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-palette-brightGreen/10 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                    <CardHeader className="pb-4 relative">
+                      <motion.div
+                        initial={{ scale: 0.9 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <CardTitle className="text-palette-darkGreen flex items-center gap-2 text-xl">
+                          <motion.div
+                            animate={{ rotate: [0, 5, -5, 0] }}
+                            transition={{ duration: 4, repeat: Infinity }}
+                          >
+                            <Rocket className="h-5 w-5 text-palette-brightGreen" />
+                          </motion.div>
+                          Welcome back, Ananya!
+                          <motion.span
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="text-lg"
+                          >
+                            🎯
+                          </motion.span>
+                        </CardTitle>
+                        <CardDescription className="text-palette-darkGreen/70">
+                          Your professional network is thriving! Let&apos;s make some impact together. ✨
+                        </CardDescription>
+                      </motion.div>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-palette-beige/20">
-                          <div className="h-10 w-10 rounded-full bg-palette-brightGreen/20 flex items-center justify-center">
-                            <Calendar className="h-5 w-5 text-palette-brightGreen" />
-                          </div>
+                        <motion.div
+                          className="flex items-center gap-3 p-4 rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200/50"
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <motion.div
+                            className="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                          >
+                            <Calendar className="h-6 w-6 text-blue-600" />
+                          </motion.div>
                           <div>
-                            <p className="text-sm font-medium text-palette-darkGreen">Next Event</p>
+                            <p className="text-sm font-medium text-palette-darkGreen flex items-center gap-1">
+                              Next Event
+                              <Coffee className="h-3 w-3 text-amber-600" />
+                            </p>
                             <p className="text-xs text-palette-darkGreen/70">Annual Alumni Meet (Jun 15)</p>
+                            <p className="text-xs text-blue-600 font-medium">Can&apos;t wait to see everyone! 🎉</p>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-palette-beige/20">
-                          <div className="h-10 w-10 rounded-full bg-palette-brightGreen/20 flex items-center justify-center">
-                            <MessageSquare className="h-5 w-5 text-palette-brightGreen" />
-                          </div>
+                        </motion.div>
+
+                        <motion.div
+                          className="flex items-center gap-3 p-4 rounded-lg bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border border-purple-200/50"
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <motion.div
+                            className="h-12 w-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center"
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                          >
+                            <MessageSquare className="h-6 w-6 text-purple-600" />
+                          </motion.div>
                           <div>
-                            <p className="text-sm font-medium text-palette-darkGreen">Mentorship Requests</p>
+                            <p className="text-sm font-medium text-palette-darkGreen flex items-center gap-1">
+                              Mentorship Requests
+                              <Lightbulb className="h-3 w-3 text-yellow-500" />
+                            </p>
                             <p className="text-xs text-palette-darkGreen/70">3 pending requests</p>
+                            <p className="text-xs text-purple-600 font-medium">Future leaders await! 🌟</p>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-palette-beige/20">
-                          <div className="h-10 w-10 rounded-full bg-palette-brightGreen/20 flex items-center justify-center">
-                            <Briefcase className="h-5 w-5 text-palette-brightGreen" />
-                          </div>
+                        </motion.div>
+
+                        <motion.div
+                          className="flex items-center gap-3 p-4 rounded-lg bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200/50"
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <motion.div
+                            className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center"
+                            animate={{ y: [0, -2, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            <Briefcase className="h-6 w-6 text-green-600" />
+                          </motion.div>
                           <div>
-                            <p className="text-sm font-medium text-palette-darkGreen">Job Opportunities</p>
+                            <p className="text-sm font-medium text-palette-darkGreen flex items-center gap-1">
+                              Job Opportunities
+                              <Target className="h-3 w-3 text-red-500" />
+                            </p>
                             <p className="text-xs text-palette-darkGreen/70">15 new postings this month</p>
+                            <p className="text-xs text-green-600 font-medium">Career growth incoming! 🚀</p>
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Achievement Streak */}
+                      <motion.div
+                        className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg border border-amber-200/50"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <motion.div
+                              animate={{ rotate: [0, 10, -10, 0] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <Trophy className="h-6 w-6 text-amber-600" />
+                            </motion.div>
+                            <div>
+                              <p className="font-medium text-palette-darkGreen">Alumni Engagement Streak</p>
+                              <p className="text-sm text-palette-darkGreen/70">You&apos;re on fire! 🔥 Keep it up!</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-2xl font-bold text-amber-600">47</p>
+                            <p className="text-xs text-palette-darkGreen/70">days active</p>
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -499,47 +604,154 @@ export default function AlumniDashboard() {
                   </div>
                 </motion.div>
 
-                {/* Quick Links */}
+                {/* Quick Links with Professional Playfulness */}
                 <motion.div variants={itemVariants}>
-                  <h2 className="text-xl font-semibold text-palette-darkGreen mb-4">Quick Links</h2>
+                  <h2 className="text-xl font-semibold text-palette-darkGreen mb-4 flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-palette-brightGreen" />
+                    Quick Actions
+                    <span className="text-sm font-normal text-palette-darkGreen/70">(Let&apos;s make things happen! 💪)</span>
+                  </h2>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-colors">
-                      <CardContent className="pt-6 text-center">
-                        <div className="mx-auto w-12 h-12 rounded-full bg-palette-beige flex items-center justify-center mb-4">
-                          <Share2 className="h-6 w-6 text-palette-darkGreen" />
-                        </div>
-                        <h3 className="font-medium text-palette-darkGreen">Share Job Openings</h3>
-                        <p className="text-xs text-palette-darkGreen/70 mt-1">Help fellow alumni find opportunities</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-colors">
-                      <CardContent className="pt-6 text-center">
-                        <div className="mx-auto w-12 h-12 rounded-full bg-palette-beige flex items-center justify-center mb-4">
-                          <GraduationCap className="h-6 w-6 text-palette-darkGreen" />
-                        </div>
-                        <h3 className="font-medium text-palette-darkGreen">Become a Mentor</h3>
-                        <p className="text-xs text-palette-darkGreen/70 mt-1">Guide current students in their journey</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-colors">
-                      <CardContent className="pt-6 text-center">
-                        <div className="mx-auto w-12 h-12 rounded-full bg-palette-beige flex items-center justify-center mb-4">
-                          <Building className="h-6 w-6 text-palette-darkGreen" />
-                        </div>
-                        <h3 className="font-medium text-palette-darkGreen">Campus Visits</h3>
-                        <p className="text-xs text-palette-darkGreen/70 mt-1">Schedule a visit to your alma mater</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-colors">
-                      <CardContent className="pt-6 text-center">
-                        <div className="mx-auto w-12 h-12 rounded-full bg-palette-beige flex items-center justify-center mb-4">
-                          <Award className="h-6 w-6 text-palette-darkGreen" />
-                        </div>
-                        <h3 className="font-medium text-palette-darkGreen">Update Achievements</h3>
-                        <p className="text-xs text-palette-darkGreen/70 mt-1">Share your success with the community</p>
-                      </CardContent>
-                    </Card>
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+                        <CardContent className="pt-6 text-center">
+                          <motion.div
+                            className="mx-auto w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 flex items-center justify-center mb-4"
+                            animate={{ rotate: [0, 5, -5, 0] }}
+                            transition={{ duration: 4, repeat: Infinity }}
+                          >
+                            <Share2 className="h-7 w-7 text-blue-600" />
+                          </motion.div>
+                          <h3 className="font-medium text-palette-darkGreen">Share Job Openings</h3>
+                          <p className="text-xs text-palette-darkGreen/70 mt-1">Help fellow alumni find opportunities</p>
+                          <p className="text-xs text-blue-600 font-medium mt-2">Be the bridge! 🌉</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+                        <CardContent className="pt-6 text-center">
+                          <motion.div
+                            className="mx-auto w-14 h-14 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center mb-4"
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                          >
+                            <GraduationCap className="h-7 w-7 text-purple-600" />
+                          </motion.div>
+                          <h3 className="font-medium text-palette-darkGreen">Become a Mentor</h3>
+                          <p className="text-xs text-palette-darkGreen/70 mt-1">Guide current students in their journey</p>
+                          <p className="text-xs text-purple-600 font-medium mt-2">Shape the future! 🌟</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
+                        <CardContent className="pt-6 text-center">
+                          <motion.div
+                            className="mx-auto w-14 h-14 rounded-full bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 flex items-center justify-center mb-4"
+                            animate={{ y: [0, -3, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            <Building className="h-7 w-7 text-green-600" />
+                          </motion.div>
+                          <h3 className="font-medium text-palette-darkGreen">Campus Visits</h3>
+                          <p className="text-xs text-palette-darkGreen/70 mt-1">Schedule a visit to your alma mater</p>
+                          <p className="text-xs text-green-600 font-medium mt-2">Nostalgia trip! 🏫</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
+                        <CardContent className="pt-6 text-center">
+                          <motion.div
+                            className="mx-auto w-14 h-14 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 flex items-center justify-center mb-4"
+                            animate={{ rotate: [0, 10, -10, 0] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                          >
+                            <Award className="h-7 w-7 text-amber-600" />
+                          </motion.div>
+                          <h3 className="font-medium text-palette-darkGreen">Update Achievements</h3>
+                          <p className="text-xs text-palette-darkGreen/70 mt-1">Share your success with the community</p>
+                          <p className="text-xs text-amber-600 font-medium mt-2">Celebrate wins! 🎉</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
                   </div>
+
+                  {/* Fun Alumni Stats */}
+                  <motion.div
+                    className="mt-8 p-6 bg-gradient-to-r from-palette-beige/20 to-palette-brightGreen/10 rounded-lg border border-palette-brightGreen/20"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <h3 className="font-medium text-palette-darkGreen mb-4 flex items-center gap-2">
+                      <PartyPopper className="h-5 w-5 text-palette-brightGreen" />
+                      Alumni Network Fun Facts
+                      <span className="text-sm font-normal text-palette-darkGreen/70">(Because numbers can be fun too! 📊)</span>
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      <div className="text-center">
+                        <motion.p
+                          className="text-3xl font-bold text-palette-brightGreen"
+                          animate={{ scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                        >
+                          2,847
+                        </motion.p>
+                        <p className="text-sm text-palette-darkGreen/70">Active Alumni</p>
+                        <p className="text-xs text-palette-darkGreen/60">Growing strong! 💪</p>
+                      </div>
+                      <div className="text-center">
+                        <motion.p
+                          className="text-3xl font-bold text-blue-600"
+                          animate={{ scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                        >
+                          156
+                        </motion.p>
+                        <p className="text-sm text-palette-darkGreen/70">Companies</p>
+                        <p className="text-xs text-palette-darkGreen/60">Global reach! 🌍</p>
+                      </div>
+                      <div className="text-center">
+                        <motion.p
+                          className="text-3xl font-bold text-purple-600"
+                          animate={{ scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                        >
+                          89%
+                        </motion.p>
+                        <p className="text-sm text-palette-darkGreen/70">Success Rate</p>
+                        <p className="text-xs text-palette-darkGreen/60">Crushing it! 🚀</p>
+                      </div>
+                      <div className="text-center">
+                        <motion.p
+                          className="text-3xl font-bold text-green-600"
+                          animate={{ scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+                        >
+                          ₹2.1Cr
+                        </motion.p>
+                        <p className="text-sm text-palette-darkGreen/70">Avg Package</p>
+                        <p className="text-xs text-palette-darkGreen/60">Living the dream! ✨</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </motion.div>
               </motion.div>
             )}
@@ -749,6 +961,228 @@ export default function AlumniDashboard() {
                               </div>
                             </div>
                           </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </motion.div>
+            )}
+
+            {/* Give Back Tab */}
+            {activeTab === "giveback" && (
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="space-y-6"
+              >
+                <motion.div variants={itemVariants}>
+                  <Card className="border-palette-darkGreen/20 bg-gradient-to-r from-palette-beige/10 to-palette-brightGreen/5">
+                    <CardHeader>
+                      <CardTitle className="text-palette-darkGreen flex items-center gap-2">
+                        <motion.div
+                          animate={{ rotate: [0, 10, -10, 0] }}
+                          transition={{ duration: 3, repeat: Infinity }}
+                        >
+                          <Gift className="h-6 w-6 text-palette-brightGreen" />
+                        </motion.div>
+                        Give Back & Support
+                        <span className="text-sm font-normal text-palette-darkGreen/70">(Spread the love! 💝)</span>
+                      </CardTitle>
+                      <CardDescription>
+                        Support your alma mater and help current students achieve their dreams! Every contribution makes a difference. ✨
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      {/* Donation Impact */}
+                      <div className="mb-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200/50">
+                        <h3 className="font-medium text-palette-darkGreen mb-4 flex items-center gap-2">
+                          <Trophy className="h-5 w-5 text-amber-600" />
+                          Your Impact So Far
+                          <span className="text-sm font-normal text-palette-darkGreen/70">(You&apos;re amazing! 🌟)</span>
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                          <div className="text-center">
+                            <motion.p
+                              className="text-3xl font-bold text-green-600"
+                              animate={{ scale: [1, 1.1, 1] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              ₹25,000
+                            </motion.p>
+                            <p className="text-sm text-palette-darkGreen/70">Total Donated</p>
+                            <p className="text-xs text-green-600 font-medium">Generous heart! 💚</p>
+                          </div>
+                          <div className="text-center">
+                            <motion.p
+                              className="text-3xl font-bold text-blue-600"
+                              animate={{ scale: [1, 1.1, 1] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                            >
+                              12
+                            </motion.p>
+                            <p className="text-sm text-palette-darkGreen/70">Students Helped</p>
+                            <p className="text-xs text-blue-600 font-medium">Life changer! 🎓</p>
+                          </div>
+                          <div className="text-center">
+                            <motion.p
+                              className="text-3xl font-bold text-purple-600"
+                              animate={{ scale: [1, 1.1, 1] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                            >
+                              #3
+                            </motion.p>
+                            <p className="text-sm text-palette-darkGreen/70">Top Contributor</p>
+                            <p className="text-xs text-purple-600 font-medium">Superstar! ⭐</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Donation Options */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <motion.div
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Card className="border-blue-200/50 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-palette-darkGreen flex items-center gap-2">
+                                <GraduationCap className="h-5 w-5 text-blue-600" />
+                                Scholarship Fund
+                              </CardTitle>
+                              <CardDescription>Help deserving students pursue their education</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-3">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-palette-darkGreen/70">Goal: ₹5,00,000</span>
+                                  <span className="text-blue-600 font-medium">₹3,47,500 raised</span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                  <motion.div
+                                    className="bg-blue-600 h-2 rounded-full"
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "69.5%" }}
+                                    transition={{ duration: 2, delay: 0.5 }}
+                                  ></motion.div>
+                                </div>
+                                <p className="text-xs text-palette-darkGreen/60">69.5% complete - Almost there! 🎯</p>
+                              </div>
+                            </CardContent>
+                            <CardFooter>
+                              <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">
+                                Donate Now
+                              </Button>
+                            </CardFooter>
+                          </Card>
+                        </motion.div>
+
+                        <motion.div
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Card className="border-green-200/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-palette-darkGreen flex items-center gap-2">
+                                <Building className="h-5 w-5 text-green-600" />
+                                Infrastructure Development
+                              </CardTitle>
+                              <CardDescription>Upgrade labs, libraries, and facilities</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-3">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-palette-darkGreen/70">Goal: ₹10,00,000</span>
+                                  <span className="text-green-600 font-medium">₹6,23,000 raised</span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                  <motion.div
+                                    className="bg-green-600 h-2 rounded-full"
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "62.3%" }}
+                                    transition={{ duration: 2, delay: 0.7 }}
+                                  ></motion.div>
+                                </div>
+                                <p className="text-xs text-palette-darkGreen/60">62.3% complete - Making progress! 🏗️</p>
+                              </div>
+                            </CardContent>
+                            <CardFooter>
+                              <Button className="w-full bg-green-600 text-white hover:bg-green-700">
+                                Contribute
+                              </Button>
+                            </CardFooter>
+                          </Card>
+                        </motion.div>
+                      </div>
+
+                      {/* Other Ways to Give Back */}
+                      <div>
+                        <h3 className="font-medium text-palette-darkGreen mb-4 flex items-center gap-2">
+                          <Sparkles className="h-5 w-5 text-palette-brightGreen" />
+                          Other Ways to Give Back
+                          <span className="text-sm font-normal text-palette-darkGreen/70">(Time is precious too! ⏰)</span>
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <motion.div
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer">
+                              <CardContent className="pt-6 text-center">
+                                <motion.div
+                                  className="mx-auto w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4"
+                                  animate={{ rotate: [0, 5, -5, 0] }}
+                                  transition={{ duration: 3, repeat: Infinity }}
+                                >
+                                  <MessageSquare className="h-6 w-6 text-purple-600" />
+                                </motion.div>
+                                <h3 className="font-medium text-palette-darkGreen">Guest Lectures</h3>
+                                <p className="text-xs text-palette-darkGreen/70 mt-1">Share your expertise with students</p>
+                                <p className="text-xs text-purple-600 font-medium mt-2">Inspire minds! 🧠</p>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+
+                          <motion.div
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer">
+                              <CardContent className="pt-6 text-center">
+                                <motion.div
+                                  className="mx-auto w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4"
+                                  animate={{ scale: [1, 1.1, 1] }}
+                                  transition={{ duration: 2, repeat: Infinity }}
+                                >
+                                  <Briefcase className="h-6 w-6 text-orange-600" />
+                                </motion.div>
+                                <h3 className="font-medium text-palette-darkGreen">Internship Programs</h3>
+                                <p className="text-xs text-palette-darkGreen/70 mt-1">Offer internships at your company</p>
+                                <p className="text-xs text-orange-600 font-medium mt-2">Open doors! 🚪</p>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+
+                          <motion.div
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <Card className="border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all cursor-pointer">
+                              <CardContent className="pt-6 text-center">
+                                <motion.div
+                                  className="mx-auto w-12 h-12 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-4"
+                                  animate={{ y: [0, -2, 0] }}
+                                  transition={{ duration: 2, repeat: Infinity }}
+                                >
+                                  <Users className="h-6 w-6 text-pink-600" />
+                                </motion.div>
+                                <h3 className="font-medium text-palette-darkGreen">Alumni Events</h3>
+                                <p className="text-xs text-palette-darkGreen/70 mt-1">Help organize reunions and meetups</p>
+                                <p className="text-xs text-pink-600 font-medium mt-2">Bring us together! 🤝</p>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
                         </div>
                       </div>
                     </CardContent>

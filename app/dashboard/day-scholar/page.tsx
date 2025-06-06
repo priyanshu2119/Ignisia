@@ -358,7 +358,7 @@ export default function DayScholarDashboard() {
                   <div className="grid gap-4 md:grid-cols-3">
                     <Card className="bg-white dark:bg-gray-950 border-palette-beige">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-palette-darkGreen text-lg">Today's Classes</CardTitle>
+                        <CardTitle className="text-palette-darkGreen text-lg">Today&apos;s Classes</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
@@ -803,7 +803,7 @@ export default function DayScholarDashboard() {
                     <CardHeader>
                       <CardTitle className="text-palette-darkGreen">Suggest a Study Space</CardTitle>
                       <CardDescription className="text-palette-darkGreen/70">
-                        Know a great place to study that's not listed? Share it with the community!
+                        Know a great place to study that&apos;s not listed? Share it with the community!
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">

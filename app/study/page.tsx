@@ -20,7 +20,7 @@ const subjects = [
     icon: "💻",
     courses: 24,
     resources: 156,
-    image: "/placeholder.svg?height=200&width=300&text=Computer+Science",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const subjects = [
     icon: "🧮",
     courses: 18,
     resources: 132,
-    image: "/placeholder.svg?height=200&width=300&text=Mathematics",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const subjects = [
     icon: "⚛️",
     courses: 15,
     resources: 98,
-    image: "/placeholder.svg?height=200&width=300&text=Physics",
+    image: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const subjects = [
     icon: "🧬",
     courses: 20,
     resources: 145,
-    image: "/placeholder.svg?height=200&width=300&text=Biology",
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const subjects = [
     icon: "🧪",
     courses: 16,
     resources: 112,
-    image: "/placeholder.svg?height=200&width=300&text=Chemistry",
+    image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 6,
@@ -60,7 +60,7 @@ const subjects = [
     icon: "🔧",
     courses: 22,
     resources: 178,
-    image: "/placeholder.svg?height=200&width=300&text=Engineering",
+    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
 ]
 
@@ -205,7 +205,12 @@ export default function StudyPage() {
           </div>
           <div className="relative h-[300px] md:h-[400px] rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-palette-beige"></div>
-            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=500&text=Study+Resources')] mix-blend-overlay opacity-60"></div>
+            <Image
+              src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=500&h=400&auto=format&fit=crop&ixlib=rb-4.0.3"
+              alt="Study Resources"
+              fill
+              className="object-cover mix-blend-overlay opacity-60"
+            />
             <div className="absolute bottom-0 left-0 right-0 p-6 text-palette-darkGreen">
               <h2 className="text-2xl font-bold mb-2">Study Smarter</h2>
               <p className="text-palette-darkGreen/90">Resources for every subject</p>

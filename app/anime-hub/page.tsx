@@ -16,7 +16,7 @@ const featuredAnime = [
   {
     id: 1,
     title: "Attack on Titan",
-    image: "/placeholder.svg?height=300&width=200&text=AoT",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=300&h=400&auto=format&fit=crop&ixlib=rb-4.0.3",
     rating: 4.8,
     episodes: 87,
     genre: "Action, Drama",
@@ -25,7 +25,7 @@ const featuredAnime = [
   {
     id: 2,
     title: "Demon Slayer",
-    image: "/placeholder.svg?height=300&width=200&text=Demon+Slayer",
+    image: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=300&h=400&auto=format&fit=crop&ixlib=rb-4.0.3",
     rating: 4.7,
     episodes: 44,
     genre: "Action, Fantasy",
@@ -34,7 +34,7 @@ const featuredAnime = [
   {
     id: 3,
     title: "Jujutsu Kaisen",
-    image: "/placeholder.svg?height=300&width=200&text=Jujutsu+Kaisen",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=300&h=400&auto=format&fit=crop&ixlib=rb-4.0.3",
     rating: 4.6,
     episodes: 24,
     genre: "Action, Supernatural",
@@ -43,7 +43,7 @@ const featuredAnime = [
   {
     id: 4,
     title: "My Hero Academia",
-    image: "/placeholder.svg?height=300&width=200&text=MHA",
+    image: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=300&h=400&auto=format&fit=crop&ixlib=rb-4.0.3",
     rating: 4.5,
     episodes: 113,
     genre: "Action, Superhero",
@@ -59,7 +59,7 @@ const upcomingEvents = [
     time: "7:00 PM",
     location: "Student Center, Room 101",
     description: "Join us for a screening of the latest anime movie releases!",
-    image: "/placeholder.svg?height=200&width=300&text=Movie+Night",
+    image: "https://images.unsplash.com/photo-1489599735734-79b4169c2a78?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 2,
@@ -68,7 +68,7 @@ const upcomingEvents = [
     time: "5:30 PM",
     location: "Arts Building, Room 203",
     description: "Learn how to create amazing cosplay costumes with our expert crafters.",
-    image: "/placeholder.svg?height=200&width=300&text=Cosplay+Workshop",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     id: 3,
@@ -77,7 +77,7 @@ const upcomingEvents = [
     time: "6:00 PM",
     location: "Library, Study Room B",
     description: "Learn the basics of manga-style drawing from experienced artists.",
-    image: "/placeholder.svg?height=200&width=300&text=Manga+Drawing",
+    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=300&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
 ]
 
@@ -166,7 +166,12 @@ export default function AnimeHubPage() {
           </div>
           <div className="relative h-[300px] md:h-[400px] rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-palette-lightYellow"></div>
-            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=500&text=Anime+Community')] mix-blend-overlay opacity-60"></div>
+            <Image
+              src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=500&h=400&auto=format&fit=crop&ixlib=rb-4.0.3"
+              alt="Anime Community"
+              fill
+              className="object-cover mix-blend-overlay opacity-60"
+            />
             <div className="absolute bottom-0 left-0 right-0 p-6 text-palette-darkGreen">
               <h2 className="text-2xl font-bold mb-2">Connect with Fans</h2>
               <p className="text-palette-darkGreen/90">Share your passion for anime</p>
@@ -303,7 +308,7 @@ export default function AnimeHubPage() {
                     <div className="flex gap-4 items-center p-4 rounded-lg border border-palette-beige">
                       <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden rounded-md">
                         <Image
-                          src={`/placeholder.svg?height=80&width=60&text=${i}`}
+                          src={`https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=60&h=80&auto=format&fit=crop&ixlib=rb-4.0.3&sig=${i}`}
                           alt="Anime thumbnail"
                           fill
                           className="object-cover"
@@ -359,7 +364,7 @@ export default function AnimeHubPage() {
                     <div className="flex gap-4 items-center p-4 rounded-lg border border-palette-beige">
                       <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden rounded-md">
                         <Image
-                          src={`/placeholder.svg?height=80&width=60&text=P${i}`}
+                          src={`https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=60&h=80&auto=format&fit=crop&ixlib=rb-4.0.3&sig=${i}`}
                           alt="Anime thumbnail"
                           fill
                           className="object-cover"
@@ -415,7 +420,7 @@ export default function AnimeHubPage() {
                       <div className="flex gap-4 items-center p-4 rounded-lg border border-palette-beige">
                         <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden rounded-md">
                           <Image
-                            src={`/placeholder.svg?height=80&width=60&text=F${id}`}
+                            src={`https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=60&h=80&auto=format&fit=crop&ixlib=rb-4.0.3&sig=${id}`}
                             alt="Anime thumbnail"
                             fill
                             className="object-cover"

@@ -20,7 +20,7 @@ const featuredEvents = [
     date: "April 20, 2025",
     time: "6:00 PM - 11:00 PM",
     location: "Campus Quad",
-    image: "/placeholder.svg?height=300&width=500&text=Music+Festival",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=500&h=300&auto=format&fit=crop&ixlib=rb-4.0.3",
     category: "Music",
     attendees: 245,
   },
@@ -30,7 +30,7 @@ const featuredEvents = [
     date: "April 25, 2025",
     time: "10:00 AM - 4:00 PM",
     location: "Student Center",
-    image: "/placeholder.svg?height=300&width=500&text=Career+Fair",
+    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=500&h=300&auto=format&fit=crop&ixlib=rb-4.0.3",
     category: "Career",
     attendees: 320,
   },
@@ -40,7 +40,7 @@ const featuredEvents = [
     date: "May 1-2, 2025",
     time: "48 Hours",
     location: "Engineering Building",
-    image: "/placeholder.svg?height=300&width=500&text=Hackathon",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=500&h=300&auto=format&fit=crop&ixlib=rb-4.0.3",
     category: "Tech",
     attendees: 150,
   },
@@ -190,7 +190,12 @@ export default function EventsPage() {
           </div>
           <div className="relative h-[300px] md:h-[400px] rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-palette-lightYellow"></div>
-            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=500&text=Campus+Events')] mix-blend-overlay opacity-60"></div>
+            <Image
+              src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=500&h=400&auto=format&fit=crop&ixlib=rb-4.0.3"
+              alt="Campus Events"
+              fill
+              className="object-cover mix-blend-overlay opacity-60"
+            />
             <div className="absolute bottom-0 left-0 right-0 p-6 text-palette-darkGreen">
               <h2 className="text-2xl font-bold mb-2">Connect & Engage</h2>
               <p className="text-palette-darkGreen/90">Find events that match your interests</p>

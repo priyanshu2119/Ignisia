@@ -76,6 +76,26 @@ const services = [
     mediaType: "gif",
     image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGVsdXliamRha3g1YjZhczcxZHNlYXk1dDF5eXhkcGJrd2IwOTJneSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JhL0Gpfbvs4Y07K/giphy.gif",
   },
+  {
+    id: 5,
+    title: "Opportunities Hub",
+    description: "Find internships, scholarships, workshops, and connect with alumni for career growth.",
+    icon: "🚀",
+    url: "/opportunities",
+    color: "bg-palette-brightGreen",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmt1a2tmYnN5aWxna2ZtNXlxbzdjeXhidTFzamZlZTBpb2U0OXNrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPEqDGUULpEU0aQ/giphy.gif",
+  },
+  {
+    id: 6,
+    title: "Hostel Connect",
+    description: "Connect with fellow hostelers for food delivery, buy/sell items, and announcements.",
+    icon: "🏠",
+    url: "/hostel-connect",
+    color: "bg-palette-lightYellow",
+    mediaType: "gif",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHlyemhhdGozc2xoZnV2djhiaDRrbDduYTJqcmhucmF1ZzR2NW5wYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13xxoHYKjVkqCQ/giphy.gif",
+  },
   ]
 
 
@@ -163,10 +183,11 @@ const alumni = [
 ]
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=870&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=870&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=870&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1472653431158-6364773b2fbc?q=80&w=869&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3",
+  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3",
+  "https://images.unsplash.com/photo-1472653431158-6364773b2fbc?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.0.3",
+  "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3",
 ]
 
 export default function Home() {
@@ -178,12 +199,15 @@ export default function Home() {
 
   // Check if there are any notices to show
   useEffect(() => {
-    if (notices.length > 0) {
+    // Store the notices length in a variable to avoid dependency on the array itself
+    const noticesCount = notices.length
+    
+    if (noticesCount > 0) {
       setShowNotices(true)
 
       // Rotate through notices every 5 seconds
       const noticeInterval = setInterval(() => {
-        setActiveNoticeIndex((prev) => (prev + 1) % notices.length)
+        setActiveNoticeIndex((prev) => (prev + 1) % noticesCount)
       }, 5000)
 
       return () => clearInterval(noticeInterval)
@@ -192,8 +216,11 @@ export default function Home() {
 
   // Rotate hero images
   useEffect(() => {
+    // Store the hero images length in a variable to avoid dependency on the array itself
+    const heroImagesCount = heroImages.length
+    
     const imageInterval = setInterval(() => {
-      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length)
+      setCurrentHeroImage((prev) => (prev + 1) % heroImagesCount)
     }, 7000)
 
     return () => clearInterval(imageInterval)

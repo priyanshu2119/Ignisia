@@ -32,8 +32,11 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
   const [orbitProgress, setOrbitProgress] = useState(0) // 0-360 degrees of orbit rotation
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Number of alumni cards
-  const numCards = alumni.length
+  // Memoize the alumni data to prevent unnecessary re-renders
+  const memoizedAlumni = React.useMemo(() => alumni, [alumni]);
+  
+  // Store the number of alumni cards in a memoized value
+  const numCards = React.useMemo(() => memoizedAlumni.length, [memoizedAlumni])
 
   // Stop auto-rotation when a card is selected
   useEffect(() => {
@@ -46,14 +49,14 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
 
   // Auto rotation effect
   useEffect(() => {
-    if (!autoRotate || !isHovered) return;
+    if (!autoRotate) return;
 
     const interval = setInterval(() => {
       setOrbitProgress(prev => (prev + 0.5) % 360);
     }, 50);
 
     return () => clearInterval(interval);
-  }, [autoRotate, isHovered]);
+  }, [autoRotate]);
 
   return (
     <div className="relative py-16 mx-auto max-w-5xl alumni-carousel-container">
@@ -119,7 +122,7 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
           pointerEvents: 'none' // Allow clicks to pass through to individual cards
         }}
       >
-        {alumni.map((person, index) => {
+        {memoizedAlumni.map((person, index) => {
           // Calculate the base angle for card positioning with offset for each card
           const baseAngle = (index * (360 / numCards)) % 360;
 
@@ -237,22 +240,26 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
               {/* Alumni hero section */}
               <div className="relative h-48">
                 <Image
-                  src={alumni[selectedCard].image}
-                  alt={alumni[selectedCard].name}
+                  src={selectedCard !== null ? memoizedAlumni[selectedCard]?.image || "" : ""}
+                  alt={selectedCard !== null ? memoizedAlumni[selectedCard]?.name || "Alumni" : "Alumni"}
                   fill
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-palette-darkGreen/90 to-transparent"></div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold">{alumni[selectedCard].name}</h3>
-                  <p className="text-white/90">{alumni[selectedCard].role}</p>
+                  <h3 className="text-xl font-bold">
+                    {selectedCard !== null ? memoizedAlumni[selectedCard]?.name : ""}
+                  </h3>
+                  <p className="text-white/90">
+                    {selectedCard !== null ? memoizedAlumni[selectedCard]?.role : ""}
+                  </p>
                 </div>
               </div>
 
               <div className="p-6 space-y-4">
                 <Badge className="bg-palette-brightGreen text-palette-darkGreen">
-                  Class of {alumni[selectedCard].year}
+                  Class of {selectedCard !== null ? memoizedAlumni[selectedCard]?.year : ""}
                 </Badge>
 
                 <div className="space-y-2">
@@ -263,7 +270,7 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    &quot;{alumni[selectedCard].quote}&quot;
+                    &quot;{selectedCard !== null ? memoizedAlumni[selectedCard]?.quote : ""}&quot;
                   </motion.p>
                 </div>
 

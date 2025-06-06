@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [userType, setUserType] = useState("day-scholar")
 
   return (
@@ -35,10 +35,10 @@ export default function LoginPage() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl text-palette-darkGreen mb-4">
-              Welcome to Ignisia
+              Join Ignisia Today
             </h1>
             <p className="text-palette-darkGreen/80 md:text-xl max-w-[700px] mx-auto">
-              Your personalized college experience starts here
+              Create your account to access all features
             </p>
           </motion.div>
 
@@ -76,22 +76,22 @@ export default function LoginPage() {
               >
                 <TabsContent value="day-scholar" className="mt-0">
                   <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-palette-darkGreen">Day Scholar Portal</h2>
+                    <h2 className="text-2xl font-bold text-palette-darkGreen">Day Scholar Registration</h2>
                     <p className="text-palette-darkGreen/80">
-                      Access resources tailored for students who commute daily. Connect with peers, find study spaces, and coordinate transportation.
+                      Join our community of day scholars and access resources tailored for students who commute daily.
                     </p>
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Commute sharing and coordination</span>
+                        <span>Connect with other commuters</span>
                       </li>
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Local study spaces and resources</span>
+                        <span>Find study spaces near you</span>
                       </li>
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Campus events and activities</span>
+                        <span>Access campus resources remotely</span>
                       </li>
                     </ul>
                   </div>
@@ -99,22 +99,22 @@ export default function LoginPage() {
 
                 <TabsContent value="hosteler" className="mt-0">
                   <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-palette-darkGreen">Hostel Life Central</h2>
+                    <h2 className="text-2xl font-bold text-palette-darkGreen">Hostel Registration</h2>
                     <p className="text-palette-darkGreen/80">
-                      Your ultimate hostel companion! Connect with fellow hostelers, coordinate food deliveries, find roommates, and stay updated on hostel events.
+                      Join our hostel community and connect with fellow residents for a better campus living experience.
                     </p>
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Late-night food delivery coordination</span>
+                        <span>Find roommates and friends</span>
                       </li>
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Hostel marketplace for buying/selling</span>
+                        <span>Coordinate group activities</span>
                       </li>
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Hostel-specific announcements and events</span>
+                        <span>Access hostel-specific resources</span>
                       </li>
                     </ul>
                   </div>
@@ -122,22 +122,22 @@ export default function LoginPage() {
 
                 <TabsContent value="alumni" className="mt-0">
                   <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-palette-darkGreen">Alumni Network</h2>
+                    <h2 className="text-2xl font-bold text-palette-darkGreen">Alumni Registration</h2>
                     <p className="text-palette-darkGreen/80">
-                      Stay connected with your alma mater. Mentor current students, share job opportunities, and reconnect with former classmates.
+                      Stay connected with your alma mater and help guide the next generation of students.
                     </p>
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Mentorship opportunities for current students</span>
+                        <span>Mentor current students</span>
                       </li>
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Job posting and career networking</span>
+                        <span>Share job opportunities</span>
                       </li>
                       <li className="flex items-center gap-2 text-palette-darkGreen/80">
                         <div className="h-2 w-2 rounded-full bg-palette-brightGreen"></div>
-                        <span>Alumni events and reunions</span>
+                        <span>Reconnect with classmates</span>
                       </li>
                     </ul>
                   </div>
@@ -156,29 +156,32 @@ export default function LoginPage() {
                 }`}>
                   <CardHeader>
                     <CardTitle className="text-palette-darkGreen">
-                      {userType === "day-scholar" ? "Day Scholar Login" : 
-                       userType === "hosteler" ? "Hosteler Login" : 
-                       "Alumni Login"}
+                      {userType === "day-scholar" ? "Day Scholar Registration" : 
+                       userType === "hosteler" ? "Hosteler Registration" : 
+                       "Alumni Registration"}
                     </CardTitle>
                     <CardDescription className="text-palette-darkGreen/70">
-                      {userType === "day-scholar" ? "Access your personalized day scholar dashboard" : 
-                       userType === "hosteler" ? "Jump into your hostel community" : 
-                       "Reconnect with your college community"}
+                      {userType === "day-scholar" ? "Create your day scholar account" : 
+                       userType === "hosteler" ? "Join your hostel community" : 
+                       "Connect with your college community"}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-palette-darkGreen">Email</Label>
-                      <Input id="email" placeholder="your.email@example.com" className="border-palette-beige" />
+                      <Label htmlFor="name" className="text-palette-darkGreen">Full Name</Label>
+                      <Input id="name" placeholder="Your full name" className="border-palette-beige" />
                     </div>
                     <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <Label htmlFor="password" className="text-palette-darkGreen">Password</Label>
-                        <Link href="/forgot-password" className="text-sm text-palette-brightGreen hover:underline">
-                          Forgot password?
-                        </Link>
-                      </div>
+                      <Label htmlFor="email" className="text-palette-darkGreen">Email</Label>
+                      <Input id="email" type="email" placeholder="your.email@example.com" className="border-palette-beige" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="password" className="text-palette-darkGreen">Password</Label>
                       <Input id="password" type="password" className="border-palette-beige" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="confirm-password" className="text-palette-darkGreen">Confirm Password</Label>
+                      <Input id="confirm-password" type="password" className="border-palette-beige" />
                     </div>
 
                     {userType === "alumni" && (
@@ -202,16 +205,13 @@ export default function LoginPage() {
                         userType === "alumni" ? "bg-palette-darkGreen text-white hover:bg-palette-darkGreen/90" :
                         "bg-palette-brightGreen text-palette-darkGreen hover:bg-palette-brightGreen/90"
                       }`}
-                      asChild
                     >
-                      <Link href={`/dashboard/${userType}`}>
-                        Sign In
-                      </Link>
+                      Create Account
                     </Button>
                     <div className="text-center text-sm text-palette-darkGreen/70">
-                      Don&apos;t have an account?{" "}
-                      <Link href="/signup" className="text-palette-brightGreen hover:underline">
-                        Sign up
+                      Already have an account?{" "}
+                      <Link href="/login" className="text-palette-brightGreen hover:underline">
+                        Sign in
                       </Link>
                     </div>
                   </CardFooter>
