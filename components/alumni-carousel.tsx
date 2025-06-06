@@ -13,6 +13,8 @@ interface Alumni {
   image: string
   year: string
   quote: string
+  achievement: string
+  skills: string[]
 }
 
 interface AlumniCarouselProps {
@@ -22,7 +24,6 @@ interface AlumniCarouselProps {
 // Constants for 3D orbit
 const ORBIT_RADIUS = 250; // Distance from center for orbiting
 const ORBIT_DEPTH = 150;  // Z-axis variation for 3D effect
-const BOX_DEPTH_OFFSET = 100; // Position of the invisible focal point behind the box
 
 export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
   const [isHovered, setIsHovered] = useState(false)
@@ -55,11 +56,12 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
   }, [autoRotate, isHovered]);
 
   return (
-    <div className="relative py-16 mx-auto max-w-5xl perspective">
+    <div className="relative py-16 mx-auto max-w-5xl alumni-carousel-container">
       {/* Central box that contains the cards */}
       <div
         ref={containerRef}
-        className="relative mx-auto w-64 h-64 bg-palette-beige rounded-xl border-4 border-palette-darkGreen/30 flex items-center justify-center shadow-lg z-10"
+        className="relative mx-auto w-64 h-64 bg-palette-beige rounded-xl border-4 border-palette-darkGreen/30 flex items-center justify-center shadow-lg"
+        style={{ zIndex: 5 }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           if (selectedCard === null) {
@@ -109,13 +111,14 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
         />
       </div>
 
-      {/* Invisible focal point for 3D orbit (positioned behind the box) */}
-      <div className="absolute inset-0 flex items-center justify-center" style={{ transform: `translateZ(-${BOX_DEPTH_OFFSET}px)` }}>
-        {/* This div serves as the invisible focal point for the orbit */}
-      </div>
-
       {/* Orbiting alumni cards */}
-      <div className="absolute inset-0 flex items-center justify-center preserve-3d">
+      <div
+        className="absolute inset-0 flex items-center justify-center preserve-3d"
+        style={{
+          zIndex: 10,
+          pointerEvents: 'none' // Allow clicks to pass through to individual cards
+        }}
+      >
         {alumni.map((person, index) => {
           // Calculate the base angle for card positioning with offset for each card
           const baseAngle = (index * (360 / numCards)) % 360;
@@ -131,20 +134,24 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
 
           // Calculate z-index based on position in orbit
           // Cards in front (angles near 0 or 360) should have higher z-index
-          const zIndex = Math.round(Math.cos(radians) * 10) + 20;
+          const zIndex = Math.round(Math.cos(radians) * 10) + 30;
 
           // Calculate opacity based on position (more visible in front)
-          const cardOpacity = isHovered ? 0.4 + (Math.cos(radians) + 1) / 4 : 0;
+          const cardOpacity = isHovered ? 0.6 + (Math.cos(radians) + 1) / 3 : 0;
 
           // Calculate scale based on position (larger in front, smaller in back)
-          const cardScale = isHovered ? 0.7 + (Math.cos(radians) + 1) / 5 : 0.7;
+          const cardScale = isHovered ? 0.8 + (Math.cos(radians) + 1) / 4 : 0.8;
 
           return (
             <AnimatePresence key={person.id} mode="wait">
               {/* Orbiting card */}
               {!isSelected && (
                 <motion.div
-                  className="absolute preserve-3d"
+                  className="absolute cursor-pointer alumni-card-orbit"
+                  style={{
+                    zIndex: zIndex,
+                    pointerEvents: isHovered ? 'auto' : 'none'
+                  }}
                   initial={{ opacity: 0 }}
                   animate={{
                     // 3D positioning for orbit
@@ -154,7 +161,6 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
                     rotateY: isHovered ? -angle : 0, // Rotate cards to face the viewer
                     scale: cardScale,
                     opacity: cardOpacity,
-                    zIndex: zIndex,
                   }}
                   transition={{
                     type: "spring",
@@ -167,22 +173,29 @@ export function AlumniCarousel({ alumni }: AlumniCarouselProps) {
                   }}
                   exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.3 } }}
                   onClick={() => setSelectedCard(index)}
-                  whileHover={{ scale: cardScale * 1.2, zIndex: 30 }}
+                  whileHover={{
+                    scale: cardScale * 1.2,
+                    transition: { duration: 0.2 }
+                  }}
                 >
-                  <div className="w-40 h-40 rounded-lg shadow-md overflow-hidden cursor-pointer transform preserve-3d">
+                  <div
+                    className="w-40 h-40 rounded-lg shadow-lg overflow-hidden bg-white border-2 border-palette-darkGreen/20 hover:border-palette-brightGreen/50 transition-all duration-200 alumni-card-3d"
+                  >
                     {/* Alumni image */}
                     <div className="relative h-40 w-40">
                       <Image
                         src={person.image}
                         alt={person.name}
                         fill
-                        className="object-cover"
+                        className="object-cover rounded-lg"
+                        priority={index < 3} // Priority load for first 3 images
                       />
                       {/* Only show name on hover and when close to front */}
                       {Math.cos(radians) > 0.3 && (
-                        <div className="absolute inset-0 bg-palette-darkGreen/50 flex items-end">
-                          <div className="p-2 text-white w-full">
-                            <p className="font-medium text-sm truncate">{person.name}</p>
+                        <div className="absolute inset-0 bg-gradient-to-t from-palette-darkGreen/80 to-transparent flex items-end rounded-lg">
+                          <div className="p-3 text-white w-full">
+                            <p className="font-semibold text-sm truncate">{person.name}</p>
+                            <p className="text-xs text-white/80 truncate">{person.role}</p>
                           </div>
                         </div>
                       )}

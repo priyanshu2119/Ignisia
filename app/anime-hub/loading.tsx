@@ -14,20 +14,20 @@ export default function Loading() {
         <div className="flex space-x-2 border-b pb-2">
           <Skeleton className="h-10 w-24" />
           <Skeleton className="h-10 w-24" />
+          <Skeleton className="h-10 w-24" />
         </div>
 
         {/* Content skeleton */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array(6).fill(0).map((_, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array(8).fill(0).map((_, i) => (
             <div key={i} className="space-y-3">
-              <Skeleton className="h-48 w-full rounded-lg" />
+              <Skeleton className="h-64 w-full rounded-lg" />
               <Skeleton className="h-6 w-3/4" />
               <div className="flex space-x-2">
                 <Skeleton className="h-4 w-16" />
                 <Skeleton className="h-4 w-16" />
               </div>
               <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-10 w-full" />
             </div>
           ))}
         </div>
@@ -35,4 +35,3 @@ export default function Loading() {
     </div>
   )
 }
-

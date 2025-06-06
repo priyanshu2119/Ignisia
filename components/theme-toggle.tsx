@@ -23,7 +23,7 @@ export function ThemeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {/* Fix theme toggle button to use palette colors */}
+
         <Button variant="outline" size="icon" className="h-9 w-9 rounded-full border-palette-darkGreen bg-background">
           <motion.div animate={{ rotate: theme === "dark" ? 180 : 0 }} transition={{ duration: 0.5 }}>
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all text-palette-darkGreen dark:-rotate-90 dark:scale-0" />

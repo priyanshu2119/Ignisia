@@ -271,19 +271,11 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <ThemeToggle />
               <Button
-                variant="outline"
-                size="sm"
-                asChild
-                className="transition-all hover:border-palette-brightGreen border-palette-darkGreen text-palette-darkGreen"
-              >
-                <Link href="/login">Login</Link>
-              </Button>
-              <Button
                 size="sm"
                 asChild
                 className="transition-all bg-palette-brightGreen hover:bg-palette-brightGreen/90 text-palette-darkGreen"
               >
-                <Link href="/signup">Sign Up</Link>
+                <Link href="/login">Sign In/Up</Link>
               </Button>
             </div>
           </nav>
@@ -291,8 +283,7 @@ export default function Home() {
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
             <ThemeToggle />
-            {/* Fix mobile menu functionality */}
-            {/* In the mobile menu section, update the Sheet component to properly handle state */}
+
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -306,7 +297,7 @@ export default function Home() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-background border-palette-beige">
-                {/* Rest of the mobile menu content */}
+
                 <SheetHeader className="space-y-2">
                   <SheetTitle>Mobile Menu</SheetTitle>
                   <SheetDescription>Navigate through the app.</SheetDescription>
@@ -328,15 +319,11 @@ export default function Home() {
                   </Link>
                   <div className="flex flex-col gap-2">
                     <Button
-                      variant="outline"
                       size="sm"
                       asChild
-                      className="w-full border-palette-darkGreen text-palette-darkGreen"
+                      className="w-full bg-palette-brightGreen text-palette-darkGreen"
                     >
-                      <Link href="/login">Login</Link>
-                    </Button>
-                    <Button size="sm" asChild className="w-full bg-palette-brightGreen text-palette-darkGreen">
-                      <Link href="/signup">Sign Up</Link>
+                      <Link href="/login">Sign In/Up</Link>
                     </Button>
                   </div>
                 </div>
@@ -345,48 +332,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t overflow-hidden bg-palette-beige"
-            >
-              <div className="container py-4 space-y-4">
-                <Link
-                  href="/about"
-                  className="block text-sm font-medium transition-colors hover:text-palette-brightGreen text-palette-darkGreen"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  About Us
-                </Link>
-                <Link
-                  href="/activities"
-                  className="block text-sm font-medium transition-colors hover:text-palette-brightGreen text-palette-darkGreen"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Activities
-                </Link>
-                <div className="flex flex-col gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    asChild
-                    className="w-full border-palette-darkGreen text-palette-darkGreen"
-                  >
-                    <Link href="/login">Login</Link>
-                  </Button>
-                  <Button size="sm" asChild className="w-full bg-palette-brightGreen text-palette-darkGreen">
-                    <Link href="/signup">Sign Up</Link>
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
       </header>
 
       <main>
@@ -501,7 +447,6 @@ export default function Home() {
           </div>
 
           {/* Background decoration */}
-          {/* Fix hero section background elements */}
           <div className="absolute top-0 left-0 right-0 bottom-0 -z-10 overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-palette-beige/30"></div>
             <motion.div

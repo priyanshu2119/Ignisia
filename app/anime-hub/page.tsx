@@ -198,7 +198,7 @@ export default function AnimeHubPage() {
                 onHoverEnd={() => setHoveredAnime(null)}
               >
                 <Card className="overflow-hidden h-full border-palette-beige">
-                  {/* Fix anime card hover effect */}
+
                   <div className="relative aspect-[2/3] w-full">
                     <Image
                       src={anime.image || "/placeholder.svg"}
@@ -321,7 +321,7 @@ export default function AnimeHubPage() {
                           <span className="ml-1 text-xs text-palette-darkGreen/70">(4.0)</span>
                         </div>
                       </div>
-                      {/* Fix favorites toggle button */}
+
                       <Button
                         variant="ghost"
                         size="sm"
