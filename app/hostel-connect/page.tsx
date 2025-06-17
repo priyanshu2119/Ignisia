@@ -497,7 +497,7 @@ export default function HostelConnectPage() {
                             
                             {request.notes && (
                               <div className="bg-palette-beige/30 p-3 rounded-md text-sm text-palette-darkGreen/80">
-                                <p className="italic">"{request.notes}"</p>
+                                <p className="italic">&ldquo;{request.notes}&rdquo;</p>
                               </div>
                             )}
                             
@@ -863,7 +863,7 @@ export default function HostelConnectPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-palette-lightYellow">•</span>
-                  <span>Honor your commitments when joining someone's order</span>
+                  <span>Honor your commitments when joining someone&rsquo;s order</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-palette-lightYellow">•</span>
@@ -880,7 +880,7 @@ export default function HostelConnectPage() {
               <ul className="space-y-2 text-palette-darkGreen/80">
                 <li className="flex items-start gap-2">
                   <span className="text-palette-lightYellow">•</span>
-                  <span>Be honest about the condition of items you're selling</span>
+                  <span>Be honest about the condition of items you&rsquo;re selling</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-palette-lightYellow">•</span>

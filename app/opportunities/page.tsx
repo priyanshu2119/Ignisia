@@ -788,7 +788,7 @@ export default function OpportunitiesPage() {
                 </div>
               </div>
               <p className="text-palette-darkGreen/80 mb-4">
-                "The internship opportunity I found through our college platform led to my first job at a startup, which eventually helped me land my dream role at Google."
+                &ldquo;The internship opportunity I found through our college platform led to my first job at a startup, which eventually helped me land my dream role at Google.&rdquo;
               </p>
               <Badge className="bg-palette-brightGreen text-palette-darkGreen">
                 Class of 2022
@@ -810,7 +810,7 @@ export default function OpportunitiesPage() {
                 </div>
               </div>
               <p className="text-palette-darkGreen/80 mb-4">
-                "The scholarship I received helped me focus on my studies without financial stress. The leadership workshops prepared me for my current role managing product teams."
+                &ldquo;The scholarship I received helped me focus on my studies without financial stress. The leadership workshops prepared me for my current role managing product teams.&rdquo;
               </p>
               <Badge className="bg-palette-brightGreen text-palette-darkGreen">
                 Class of 2021
@@ -832,7 +832,7 @@ export default function OpportunitiesPage() {
                 </div>
               </div>
               <p className="text-palette-darkGreen/80 mb-4">
-                "The entrepreneurship workshops and networking events gave me the confidence and connections to start my own company right after graduation."
+                &ldquo;The entrepreneurship workshops and networking events gave me the confidence and connections to start my own company right after graduation.&rdquo;
               </p>
               <Badge className="bg-palette-brightGreen text-palette-darkGreen">
                 Class of 2020
