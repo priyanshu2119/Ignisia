@@ -5,7 +5,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-> **India's integrated college super-app — role-based dashboards for hostelers, day scholars, and alumni with events, study resources, opportunities, and community features.**
+> **India's integrated college super-app — role-based dashboards for hostelers, day scholars, and alumni with events, study resources, forum, notifications, and career opportunities.**
 
 ## ✨ Features
 
@@ -15,20 +15,23 @@
 - 🎓 **Alumni Dashboard** — Networking, mentorship, job referrals, donations
 
 ### Campus Features
-- 📅 **Events** — Browse, register, and manage campus events
-- 📚 **Study Resources** — Share notes, previous papers, study materials
-- 💼 **Opportunities** — Internships, placements, freelance gigs
-- 🏨 **Hostel Connect** — Roommate matching, facility requests, community chat
+- 📅 **Events** — Browse, create, register for campus events (6 categories)
+- 📚 **Study Resources** — Share notes, papers, tutorials (6 resource types)
+- 💼 **Opportunities** — Internships, placements, freelance, research, scholarships
+- 💬 **Forum** — Campus discussions with anonymous posting (7 categories)
+- 🔔 **Notifications** — Real-time alerts for events, comments, opportunities
+- 🏨 **Hostel Connect** — Roommate matching, facility requests
 - 🎌 **Anime Hub** — Community section for anime enthusiasts
-- 🛠️ **Services** — Campus services marketplace (laundry, tiffin, printing)
-- 👤 **Profile** — User profile with achievements and activity history
+- 🛠️ **Services** — Campus services marketplace
 
-### UI/UX
-- 🌓 **Dark/Light Mode** — Theme toggle with system preference detection
-- 📱 **Fully Responsive** — Mobile-first design with adaptive layouts
-- ⚡ **Loading States** — Skeleton loaders for all async pages
-- 🚫 **Error Boundaries** — Graceful error handling + custom 404 page
-- 🎨 **50+ ShadCN Components** — Professional, accessible UI library
+### Security & Production
+- 🔒 **Security Headers** — CSP, X-Frame-Options, XSS-Protection on all APIs
+- ⏱️ **Rate Limiting** — IP-based per endpoint (10-20 req/min)
+- ✅ **Zod Validation** — All API inputs strictly validated with detailed errors
+- 🧪 **Unit Tests** — Schema validation tests (Vitest)
+- 🐳 **Docker** — Multi-stage production build
+- 🔄 **CI/CD** — GitHub Actions pipeline
+- 📝 **Structured Logging** — JSON-formatted production logs
 
 ## 🛠️ Tech Stack
 
@@ -36,28 +39,59 @@
 |-------|-----------|
 | Framework | Next.js (App Router) |
 | Language | TypeScript |
-| Styling | Tailwind CSS + ShadCN/Radix UI |
+| Styling | Tailwind CSS + ShadCN/Radix UI (50+ components) |
 | Icons | Lucide React |
 | Forms | React Hook Form + Zod |
-| State | React Context + hooks |
+| Validation | Zod (all API routes) |
+| Testing | Vitest |
 | Deployment | Docker + Vercel |
 
-## 🚀 Quick Start
+## 📡 API Endpoints
+
+| Method | Endpoint | Description | Rate Limit |
+|--------|----------|-------------|------------|
+| POST | `/api/auth` | Register/Login (action: "register" or "login") | 10/min |
+| GET | `/api/auth` | Get current user profile | — |
+| POST | `/api/events` | Create campus event | 10/min |
+| GET | `/api/events` | List events (filter by category, paginated) | — |
+| POST | `/api/resources` | Create study resource | 15/min |
+| GET | `/api/resources` | List resources (filter by subject/type) | — |
+| POST | `/api/opportunities` | Create career opportunity | 10/min |
+| GET | `/api/opportunities` | List opportunities (filter by type) | — |
+| POST | `/api/forum` | Create forum post (supports anonymous) | 10/min |
+| GET | `/api/forum` | List posts (filter by category, paginated) | — |
+| POST | `/api/notifications` | Create notification | 20/min |
+| GET | `/api/notifications` | List notifications (unread filter) | — |
+| PATCH | `/api/notifications` | Mark notifications as read (batch) | — |
+
+### Example: Create Event
 
 ```bash
-git clone https://github.com/priyanshu2119/Ignisia.git
-cd Ignisia
-
-cp .env.example .env.local
-npm install
-npm run dev    # http://localhost:3000
+curl -X POST http://localhost:3000/api/events \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Tech Fest 2026",
+    "description": "Annual technology festival with workshops and hackathon",
+    "category": "technical",
+    "date": "2026-11-15",
+    "location": "Main Auditorium",
+    "organizer": "CS Department"
+  }'
 ```
 
-## 🐳 Docker
+### Example: Register User
 
 ```bash
-docker build -t ignisia .
-docker run -p 3000:3000 --env-file .env.local ignisia
+curl -X POST http://localhost:3000/api/auth \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "register",
+    "email": "student@college.edu",
+    "password": "SecurePass123!",
+    "name": "Priya Sharma",
+    "role": "hosteler",
+    "college": "Delhi University"
+  }'
 ```
 
 ## 📁 Project Structure
@@ -67,7 +101,6 @@ app/
 ├── page.tsx                    # Landing page
 ├── login/page.tsx              # Authentication
 ├── signup/page.tsx             # Registration
-├── forgot-password/page.tsx    # Password recovery
 ├── profile/page.tsx            # User profile
 ├── dashboard/
 │   ├── hosteler/page.tsx       # Hosteler dashboard
@@ -80,32 +113,50 @@ app/
 ├── anime-hub/page.tsx          # Anime community
 ├── activities/page.tsx         # Campus activities
 ├── services/page.tsx           # Campus services
-├── about/page.tsx              # About page
+├── api/
+│   ├── auth/route.ts           # Auth (register/login/me)
+│   ├── events/route.ts         # Events CRUD
+│   ├── resources/route.ts      # Study resources CRUD
+│   ├── opportunities/route.ts  # Opportunities CRUD
+│   ├── forum/route.ts          # Forum posts CRUD
+│   └── notifications/route.ts  # Notifications CRUD + mark-read
 ├── layout.tsx                  # Root layout + theme provider
-├── loading.tsx                 # Global loading state
 ├── error.tsx                   # Error boundary
 └── not-found.tsx               # 404 page
+
+lib/
+├── types.ts                    # All Zod schemas (User, Event, Resource, etc.)
+├── logger.ts                   # Structured JSON logging
+├── utils.ts                    # Utility functions
+├── security/headers.ts         # Security headers middleware
+├── security/rate-limiter.ts    # IP-based rate limiting
+└── __tests__/types.test.ts     # Unit tests
 
 components/
 ├── ui/                         # 50+ ShadCN components
 ├── alumni-carousel.tsx         # Custom alumni showcase
-├── theme-provider.tsx          # Dark/light mode context
-└── theme-toggle.tsx            # Theme switcher button
+├── theme-provider.tsx          # Dark/light mode
+└── theme-toggle.tsx            # Theme switcher
+```
 
-lib/
-├── utils.ts                    # Utility functions (cn helper)
-├── security/headers.ts         # Security headers middleware
-└── security/rate-limiter.ts    # IP-based rate limiting
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/priyanshu2119/Ignisia.git
+cd Ignisia
+cp .env.example .env.local
+npm install
+npm run dev    # http://localhost:3000
 ```
 
 ## 🗺️ Roadmap
 
 | Phase | Status |
 |-------|--------|
-| Phase 0: Foundation + Security + CI/CD | ✅ In Progress |
-| Phase 1: Backend + Auth + Role System | Planned |
-| Phase 2: Social Features + Testing | Planned |
-| Phase 3: Production Launch | Planned |
+| Phase 0: Foundation + Security + CI/CD | ✅ Complete |
+| Phase 1: Backend + Auth + Core APIs | ✅ Complete |
+| Phase 2: Forum + Notifications + Tests | ✅ Complete |
+| Phase 3: Production Launch | ✅ Complete |
 
 ## 📄 License
 
