@@ -107,3 +107,66 @@ export const OpportunitySchema = z.object({
   createdAt: z.string(),
 });
 export type Opportunity = z.infer<typeof OpportunitySchema>;
+
+// =============================================================================
+// FORUM / DISCUSSION MODEL
+// =============================================================================
+
+export const ForumCategorySchema = z.enum(['general', 'academic', 'hostel', 'events', 'placements', 'anime', 'off-topic']);
+export type ForumCategory = z.infer<typeof ForumCategorySchema>;
+
+export const ForumPostSchema = z.object({
+  id: z.string(),
+  title: z.string().min(1).max(300),
+  content: z.string().min(1).max(10000),
+  category: ForumCategorySchema,
+  authorId: z.string(),
+  authorName: z.string(),
+  isAnonymous: z.boolean().default(false),
+  upvotes: z.number().int().min(0).default(0),
+  commentCount: z.number().int().min(0).default(0),
+  tags: z.array(z.string().max(50)).max(5).optional(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+export type ForumPost = z.infer<typeof ForumPostSchema>;
+
+export const CreateForumPostSchema = ForumPostSchema.omit({
+  id: true, authorId: true, authorName: true,
+  upvotes: true, commentCount: true, createdAt: true, updatedAt: true,
+});
+export type CreateForumPost = z.infer<typeof CreateForumPostSchema>;
+
+export const ForumCommentSchema = z.object({
+  id: z.string(),
+  postId: z.string(),
+  content: z.string().min(1).max(5000),
+  authorId: z.string(),
+  authorName: z.string(),
+  isAnonymous: z.boolean().default(false),
+  upvotes: z.number().int().min(0).default(0),
+  createdAt: z.string(),
+});
+export type ForumComment = z.infer<typeof ForumCommentSchema>;
+
+// =============================================================================
+// NOTIFICATION MODEL
+// =============================================================================
+
+export const NotificationTypeSchema = z.enum([
+  'event_reminder', 'event_registration', 'new_comment', 'new_reply',
+  'opportunity_new', 'resource_uploaded', 'mention', 'system',
+]);
+export type NotificationType = z.infer<typeof NotificationTypeSchema>;
+
+export const NotificationSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  type: NotificationTypeSchema,
+  title: z.string().min(1).max(200),
+  message: z.string().min(1).max(1000),
+  link: z.string().optional(), // Deep link to relevant page
+  isRead: z.boolean().default(false),
+  createdAt: z.string(),
+});
+export type Notification = z.infer<typeof NotificationSchema>;
