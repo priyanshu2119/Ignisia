@@ -17,6 +17,12 @@ const CreateOpportunitySchema = z.object({
 });
 
 export async function GET(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const rateCheck = checkRateLimit(ip, { maxRequests: 30, windowMs: 60_000 });
+  if (!rateCheck.allowed) {
+    return createSecureJsonResponse({ error: 'Too many requests' }, 429);
+  }
+
   const { searchParams } = new URL(req.url);
   const type = searchParams.get('type');
   const limit = Math.min(parseInt(searchParams.get('limit') || '20'), 50);

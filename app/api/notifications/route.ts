@@ -66,6 +66,12 @@ export async function POST(req: NextRequest) {
 
 /** Mark notifications as read */
 export async function PATCH(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const rateCheck = checkRateLimit(ip, { maxRequests: 20, windowMs: 60_000 });
+  if (!rateCheck.allowed) {
+    return createSecureJsonResponse({ error: 'Too many requests' }, 429);
+  }
+
   const body = await req.json();
   const schema = z.object({
     notificationIds: z.array(z.string()).min(1).max(100),
